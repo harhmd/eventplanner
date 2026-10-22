@@ -1,0 +1,20 @@
+{
+  "name": "fama-vip-event-planner",
+  "version": "1.0.0",
+  "description": "Program Semarak Tani @ Jualan Agro MADANI Mega Melaka Event Planner",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "node server.js",
+    "preview": "python -m http.server 3001"
+  },
+  "keywords": [
+    "fama",
+    "event-planner",
+    "vip-protocol",
+    "checklist",
+    "agro-madani"
+  ],
+  "author": "FAMA & KPKM Protocol Team",
+  "license": "ISC"
+}

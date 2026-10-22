@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="ms" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Manager Planner - Semarak Tani @ Jualan Agro MADANI Melaka</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        fama: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; font-size: 11px; }
+            .print-only { display: block !important; }
+            .print-break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; margin-bottom: 1rem !important; }
+            table { width: 100% !important; border-collapse: collapse !important; }
+            th, td { border: 1px solid #94a3b8 !important; padding: 6px !important; }
+        }
+    </style>
+</head>
+<body class="min-h-full bg-slate-100 text-slate-800 flex flex-col antialiased selection:bg-emerald-600 selection:text-white">
+
+    <!-- Print-only Letterhead Header -->
+    <div class="hidden print-only p-4 border-b-2 border-slate-800 mb-4">
+        <div class="flex justify-between items-start">
+            <div>
+                <h1 class="text-base font-black text-slate-900 tracking-tight">KEMENTERIAN PERTANIAN DAN KETERJAMINAN MAKANAN (KPKM)</h1>
+                <h2 class="text-sm font-extrabold text-emerald-800">LEMBAGA PEMASARAN PERTANIAN PERSEKUTUAN (FAMA)</h2>
+                <h3 class="text-lg font-black text-slate-900 mt-1">PROGRAM SEMARAK TANI @ JUALAN AGRO MADANI NEGERI MELAKA</h3>
+                <p class="text-xs text-slate-600 mt-0.5">Pelan Tindakan Bersepadu: KV Melaka Tengah (23-25 Okt) & SJK(C) Keh Seng (24 Okt Half-Day)</p>
+            </div>
+            <div class="text-right text-xs text-slate-700">
+                <span class="inline-block bg-slate-200 px-2 py-1 rounded font-bold mb-1">DOKUMEN TINDAKAN PELAKSANA</span>
+                <p class="font-semibold" id="print-duration-label">Format: 3-Hari Penuh</p>
+                <p id="print-date-label">Dicetak Pada: </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation & Header Banner -->
+    <header class="no-print bg-gradient-to-r from-fama-950 via-fama-900 to-emerald-900 text-white shadow-xl sticky top-0 z-30 border-b border-emerald-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+            <!-- Brand & Event Identity -->
+            <div class="flex items-center gap-3.5 w-full md:w-auto">
+                <div class="bg-gradient-to-br from-emerald-400 to-fama-600 p-2.5 rounded-2xl shadow-md border border-white/20 flex items-center justify-center text-white text-xl">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-[10px] uppercase tracking-wider text-amber-300 font-extrabold px-1.5 py-0.5 rounded bg-amber-950/50 border border-amber-400/40">KPKM & FAMA</span>
+                        <span class="text-[10px] text-emerald-200 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">Melaka 2026</span>
+                        <span class="text-[10px] text-amber-200 font-bold bg-amber-900/50 px-2 py-0.5 rounded border border-amber-500/30 hidden sm:inline"><i class="fa-solid fa-school text-amber-300 mr-1"></i> Termasuk 24/10 @ SJK(C) Keh Seng</span>
+                    </div>
+                    <h1 class="text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-2 mt-0.5">
+                        Semarak Tani @ Jualan Agro MADANI Melaka
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Top Action Controls -->
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end flex-wrap">
+                <!-- Duration / Event Selector -->
+                <div class="flex items-center bg-white/10 rounded-lg p-1 border border-white/20 backdrop-blur-sm shadow-sm">
+                    <span class="text-[11px] px-2 text-emerald-200 font-semibold">Pilih Acara / Format:</span>
+                    <select id="event-duration-select" onchange="changeDuration(this.value)" class="bg-emerald-950 text-white text-xs font-bold rounded px-2.5 py-1 focus:outline-none focus:ring-1 focus:ring-emerald-400 cursor-pointer">
+                        <option value="3day" selected>3-Day Mega Event (23–25 Okt @ KV Melaka Tengah)</option>
+                        <option value="half_24">Half-Day (24 Okt: Lawatan YB Menteri @ SJK(C) Keh Seng)</option>
+                        <option value="half_25">Half-Day (25 Okt: Perasmian PM @ KV Melaka Tengah)</option>
+                        <option value="2day">2-Day Event (24–25 Okt)</option>
+                        <option value="1day">1-Day Event (25 Okt)</option>
+                    </select>
+                </div>
+
+                <!-- Add Task Button -->
+                <button onclick="openAddTaskModal()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-plus text-xs"></i> <span>Tambah Tindakan</span>
+                </button>
+
+                <!-- Print Button -->
+                <button onclick="printProtocolChecklist()" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 text-xs font-semibold rounded-lg transition border border-white/20 flex items-center gap-1.5" title="Cetak Checklist Tindakan">
+                    <i class="fa-solid fa-print"></i> <span class="hidden sm:inline">Cetak</span>
+                </button>
+
+                <!-- Export Button -->
+                <button onclick="exportData()" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 text-xs font-medium rounded-lg transition border border-white/20 flex items-center gap-1.5" title="Eksport Data Backup">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+
+                <!-- Import Button -->
+                <label class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 text-xs font-medium rounded-lg transition border border-white/20 flex items-center gap-1.5 cursor-pointer" title="Import Fail JSON">
+                    <i class="fa-solid fa-upload"></i>
+                    <input type="file" id="import-file-input" class="hidden" accept=".json" onchange="handleImportFile(event)">
+                </label>
+
+                <!-- Reset Button -->
+                <button onclick="resetData()" class="px-2.5 py-1.5 bg-white/10 hover:bg-rose-500/40 text-rose-200 hover:text-white active:scale-95 text-xs font-medium rounded-lg transition border border-white/20 flex items-center gap-1.5" title="Set Semula Kemajuan">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs Bar -->
+        <div class="bg-emerald-950/70 border-t border-emerald-900/60 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto custom-scrollbar py-2 text-xs font-bold">
+                <button onclick="switchTab('checklist')" id="tab-btn-checklist" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-emerald-500 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-list-check"></i> Master Checklist & Tindakan
+                </button>
+                <button onclick="switchTab('kehseng')" id="tab-btn-kehseng" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-amber-500/30 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition flex items-center gap-1.5 whitespace-nowrap font-black">
+                    <i class="fa-solid fa-school text-amber-300"></i> SJK(C) Keh Seng (24 Okt Half-Day)
+                </button>
+                <button onclick="switchTab('perasmian')" id="tab-btn-perasmian" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-star text-amber-300"></i> Tentatif Perasmian PM (25 Okt)
+                </button>
+                <button onclick="switchTab('tapak')" id="tab-btn-tapak" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-map-location-dot"></i> Pelan Tapak & 100 Lot
+                </button>
+                <button onclick="switchTab('kewangan')" id="tab-btn-kewangan" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-money-bill-wave text-emerald-400"></i> Implikasi Bajet (RM300k)
+                </button>
+                <button onclick="switchTab('kombo')" id="tab-btn-kombo" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-basket-shopping text-rose-300"></i> Subsidi Jualan Kombo
+                </button>
+                <button onclick="switchTab('usahawan')" id="tab-btn-usahawan" class="nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-utensils text-orange-300"></i> Makanan Popular & FT
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col gap-5 flex-grow">
+
+        <!-- Top Event Metrics & Live Progress Dashboard -->
+        <section class="no-print bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <!-- Event Highlight Chips -->
+            <div id="dashboard-metrics-container" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 pb-4 border-b border-slate-100">
+                <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-100 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-semibold text-emerald-800" id="metric-label-sales">Sasaran Jualan</p>
+                        <p class="text-base font-extrabold text-slate-900" id="metric-val-sales">RM 750,000</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 rounded-xl p-3 border border-blue-100 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-semibold text-blue-800" id="metric-label-visitors">Jangkaan Pengunjung</p>
+                        <p class="text-base font-extrabold text-slate-900" id="metric-val-visitors">25,000 Orang</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 rounded-xl p-3 border border-amber-100 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                        <i class="fa-solid fa-tents"></i>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-semibold text-amber-800" id="metric-label-lots">Lot & Usahawan</p>
+                        <p class="text-base font-extrabold text-slate-900" id="metric-val-lots">100 Lot / 40 Khemah</p>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 rounded-xl p-3 border border-purple-100 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <p class="text-[11px] font-semibold text-purple-800" id="metric-label-budget">Peruntukan Bajet</p>
+                        <p class="text-base font-extrabold text-slate-900" id="metric-val-budget">RM 300,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Readiness Progress & Status -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <div class="md:col-span-3 flex flex-col gap-2">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <h2 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider" id="readiness-title">Status Kesiapsiagaan Acara (Readiness Index)</h2>
+                        </div>
+                        <span id="progress-percentage" class="text-base font-black text-fama-700">0%</span>
+                    </div>
+                    <!-- Bar -->
+                    <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-200 shadow-inner">
+                        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 via-fama-600 to-emerald-700 h-2.5 rounded-full transition-all duration-500 shadow-xs" style="width: 0%"></div>
+                    </div>
+                    <!-- Helper Info -->
+                    <div class="flex flex-wrap items-center justify-between text-xs text-slate-500">
+                        <span id="milestone-text"><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-1"></i> Tandakan tugasan yang telah diselesaikan oleh Jawatankuasa Pelaksana.</span>
+                        <span class="text-[11px] font-semibold text-slate-600" id="vip-highlight-text">VVIP: <strong class="text-slate-800">YAB PM & YB Menteri KPKM</strong></span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-5 border-t md:border-t-0 md:border-l border-slate-100 pt-3 md:pt-0 md:pl-5">
+                    <div>
+                        <p class="text-xs text-slate-500 font-medium">Tindakan Selesai</p>
+                        <p id="completed-count" class="text-xl font-black text-slate-800">0 / 0</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs text-slate-500 font-medium">Fasa / Acara Aktif</p>
+                        <p id="active-phase-label" class="text-xs font-bold text-fama-700 bg-fama-50 px-2.5 py-1 rounded-md border border-fama-100 mt-0.5 inline-block">Semua Fasa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 1: MASTER CHECKLIST & TINDAKAN ================= -->
+        <section id="tab-content-checklist" class="tab-pane flex flex-col gap-4">
+            
+            <!-- Filter Bar & Search Controls -->
+            <div class="no-print bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row gap-3 justify-between items-stretch lg:items-center">
+                <!-- Phase buttons -->
+                <div id="filter-buttons-container" class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 custom-scrollbar">
+                    <!-- Populated in JS -->
+                </div>
+
+                <!-- Secondary filters (PIC, Status, Search) -->
+                <div class="flex flex-col sm:flex-row items-center gap-2 flex-wrap">
+                    
+                    <!-- Filter by Tindakan (Jawatankuasa / PIC) -->
+                    <div class="flex items-center bg-slate-100 rounded-lg p-1 border border-slate-200 text-xs w-full sm:w-auto">
+                        <span class="text-[11px] px-2 text-slate-600 font-bold whitespace-nowrap"><i class="fa-solid fa-user-gear text-emerald-600 mr-1"></i>Tindakan:</span>
+                        <select id="pic-filter-select" onchange="handlePicFilter(this.value)" class="bg-white text-slate-800 text-xs font-semibold rounded px-2 py-1 focus:outline-none border border-slate-200 cursor-pointer max-w-[200px]">
+                            <option value="all">Semua Jawatankuasa / PIC</option>
+                            <!-- Dynamically generated in JS -->
+                        </select>
+                    </div>
+
+                    <!-- Status Filter: All / Pending / Done -->
+                    <div class="flex bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs w-full sm:w-auto">
+                        <button onclick="setStatusFilter('all')" id="status-filter-all" class="px-2.5 py-1 rounded font-bold transition text-xs bg-white text-slate-900 shadow-xs">Semua</button>
+                        <button onclick="setStatusFilter('pending')" id="status-filter-pending" class="px-2.5 py-1 rounded font-medium transition text-xs text-slate-500 hover:text-slate-800">Belum</button>
+                        <button onclick="setStatusFilter('completed')" id="status-filter-completed" class="px-2.5 py-1 rounded font-medium transition text-xs text-slate-500 hover:text-slate-800">Selesai</button>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-56">
+                        <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-search text-xs"></i>
+                        </span>
+                        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari tugasan, PIC, zon..." class="w-full pl-8 pr-7 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fama-500 focus:bg-white transition">
+                        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-circle-xmark text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Batch Action Dropdown -->
+                    <div class="relative inline-block text-left w-full sm:w-auto">
+                        <button onclick="toggleQuickMenu()" class="w-full sm:w-auto px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-ellipsis-vertical"></i> <span class="hidden sm:inline">Tindakan Pukal</span>
+                        </button>
+                        <div id="quick-menu" class="hidden absolute right-0 mt-1.5 w-52 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-20 text-xs">
+                            <button onclick="markVisibleTasks(true)" class="w-full text-left px-3.5 py-2 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 flex items-center gap-2">
+                                <i class="fa-solid fa-check-double text-emerald-600"></i> Tandakan Paparan Selesai
+                            </button>
+                            <button onclick="markVisibleTasks(false)" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 text-slate-700 flex items-center gap-2">
+                                <i class="fa-regular fa-square"></i> Nyah-tanda Paparan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Header Legend for Print & Screen -->
+            <div class="bg-emerald-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex justify-between items-center shadow-xs">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <span>SENARAI SEMAK OPERASI & PELAN TINDAKAN (ACTION MATRIX)</span>
+                </div>
+                <div class="hidden sm:flex items-center gap-4 text-[11px] text-emerald-200">
+                    <span><i class="fa-solid fa-building text-amber-300"></i> Kolum: <strong>TINDAKAN (BY WHOM)</strong> menunjukkan Jawatankuasa / Agensi pelaksana</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Checklist Container -->
+            <div id="checklist-container" class="flex flex-col gap-4 pb-8">
+                <!-- Checklist items injected via JS with dedicated TINDAKAN / BY WHOM column -->
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: SPECIAL HALF-DAY SJK(C) KEH SENG (24 OKT) ================= -->
+        <section id="tab-content-kehseng" class="tab-pane hidden flex flex-col gap-5">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-black uppercase tracking-wider text-amber-900 bg-amber-100 px-2.5 py-1 rounded-md border border-amber-300">Program Khas Half-Day (24 Okt 2026)</span>
+                            <span class="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md"><i class="fa-solid fa-clock mr-1 text-emerald-600"></i> 8.00 PG – 12.00 TGH</span>
+                        </div>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Walkabout Program Semarak Tani & Lawatan YB Menteri KPKM</h2>
+                        <p class="text-xs text-slate-600 mt-0.5"><i class="fa-solid fa-school text-rose-500 mr-1"></i> SJK (C) Keh Seng, Bukit Baru Melaka (Bukit Katil) | Etika Pakaian: <strong>Baju Korporat (Putih)</strong></p>
+                    </div>
+                    <div class="bg-gradient-to-r from-emerald-700 to-fama-800 text-white px-4 py-2 rounded-xl text-center shadow-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-emerald-200">Tetamu Kehormat</p>
+                        <p class="text-sm font-black">YB DATUK SERI HAJI MOHAMAD BIN SABU</p>
+                        <p class="text-[10px] text-emerald-200">Menteri Pertanian dan Keterjaminan Makanan (KPKM)</p>
+                    </div>
+                </div>
+
+                <!-- 4 Key Pillars of SJK(C) Keh Seng from Slide 2 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+                    <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-rose-800 bg-rose-200 px-2 py-0.5 rounded uppercase">Zon Luar Dewan</span>
+                            <h4 class="text-xs font-black text-slate-900 mt-1.5">Jualan Agro MADANI Hadapan Sekolah</h4>
+                            <ul class="text-[11px] text-slate-600 mt-1.5 space-y-1 list-disc list-inside">
+                                <li>27 khemah 10'x10' (Lot 1–22)</li>
+                                <li>Jualan hasil tani segar, LKIM, LPP</li>
+                                <li>Edaran 300 biji nanas MD2 percuma (LPNM)</li>
+                                <li>Edaran 100 papan telur percuma</li>
+                            </ul>
+                        </div>
+                        <span class="text-[10px] font-bold text-rose-800 mt-2">Tindakan: LPNM & FAMA Melaka</span>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-blue-800 bg-blue-200 px-2 py-0.5 rounded uppercase">Dalam Dewan</span>
+                            <h4 class="text-xs font-black text-slate-900 mt-1.5">Pameran 9 Agensi & Bomba</h4>
+                            <ul class="text-[11px] text-slate-600 mt-1.5 space-y-1 list-disc list-inside">
+                                <li>11 booth pameran agensi KPKM</li>
+                                <li>Teknologi pertanian moden, drone, IoT</li>
+                                <li>Khidmat nasihat & kaunseling</li>
+                                <li>Zon Pameran Bomba di parkir</li>
+                            </ul>
+                        </div>
+                        <span class="text-[10px] font-bold text-blue-800 mt-2">Tindakan: 9 Agensi KPKM & Bomba</span>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-amber-800 bg-amber-200 px-2 py-0.5 rounded uppercase">Dalam Dewan</span>
+                            <h4 class="text-xs font-black text-slate-900 mt-1.5">Sarapan Pagi Bersama Masyarakat</h4>
+                            <ul class="text-[11px] text-slate-600 mt-1.5 space-y-1 list-disc list-inside">
+                                <li>4 Meja Bulat VIP (Sajian Dome)</li>
+                                <li>36 Meja Sarapan Komuniti</li>
+                                <li>2 Meja Buffet memanjang</li>
+                                <li>Sesi dialog & ramah mesra satu meja</li>
+                            </ul>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-800 mt-2">Tindakan: Pramusaji Petugas FAMA</span>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-extrabold text-purple-800 bg-purple-200 px-2 py-0.5 rounded uppercase">Aktiviti Sampingan</span>
+                            <h4 class="text-xs font-black text-slate-900 mt-1.5">Sukan Rakyat & Persembahan</h4>
+                            <ul class="text-[11px] text-slate-600 mt-1.5 space-y-1 list-disc list-inside">
+                                <li>Pertandingan Dam Haji (3 meja)</li>
+                                <li>Persembahan Tarian Singa menyambut YBM</li>
+                                <li>Pertunjukan Gendang di pentas utama</li>
+                                <li>Hadiah menarik disediakan</li>
+                            </ul>
+                        </div>
+                        <span class="text-[10px] font-bold text-purple-800 mt-2">Tindakan: JK Kesenian & Belia</span>
+                    </div>
+                </div>
+
+                <!-- Minute-by-Minute Itinerary for YBM Visit (Slide 4) -->
+                <div class="mt-6 pt-5 border-t border-slate-200">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-emerald-600"></i> Atur Cara Lawatan YB Menteri KPKM (24 Oktober 2026)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                            <span class="px-2.5 py-1 rounded bg-slate-200 text-slate-800 text-xs font-black">08.00 PG</span>
+                            <div class="flex-1 text-xs">
+                                <strong class="text-slate-900 text-sm">Kehadiran Pengunjung & Pembukaan Jualan Agro MADANI</strong>
+                                <p class="text-slate-600 mt-0.5">Pengunjung mula membanjiri tapak jualan hadapan SJK(C) Keh Seng; kaunter jualan hasil tani segar dibuka.</p>
+                            </div>
+                            <span class="text-[11px] font-bold text-slate-500">Tindakan: Urus Setia FAMA</span>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                            <span class="px-2.5 py-1 rounded bg-blue-100 text-blue-900 text-xs font-black">08.30 PG</span>
+                            <div class="flex-1 text-xs">
+                                <strong class="text-slate-900 text-sm">Ketibaan Dif-dif Jemputan</strong>
+                                <p class="text-slate-600 mt-0.5">Ketibaan Pegawai Daerah, EXCO Kerajaan Negeri, Ketua-ketua Agensi KPKM dan komuniti Bukit Katil.</p>
+                            </div>
+                            <span class="text-[11px] font-bold text-blue-700">Tindakan: JK Sambutan FAMA</span>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                            <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 text-xs font-black">08.40 PG</span>
+                            <div class="flex-1 text-xs">
+                                <strong class="text-slate-900 text-sm">Ketibaan YBrs. Tuan Haji Abang Ahmad Kerdee bin Abang Masagus</strong>
+                                <p class="text-slate-600 mt-0.5">Pengerusi Lembaga Pemasaran Pertanian Persekutuan (FAMA) tiba di perkarangan sekolah.</p>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-700">Tindakan: KP FAMA & Pengarah FAMA Melaka</span>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-amber-50 border-2 border-amber-300 flex items-start gap-3">
+                            <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-xs font-black">09.00 PG</span>
+                            <div class="flex-1 text-xs space-y-1.5">
+                                <strong class="text-amber-950 text-sm flex items-center gap-1.5">
+                                    <i class="fa-solid fa-crown text-amber-600"></i> Ketibaan YB Datuk Seri Haji Mohamad bin Sabu (Menteri KPKM)
+                                </strong>
+                                <ul class="text-slate-700 list-disc list-inside space-y-0.5">
+                                    <li><strong>Lawatan ke Lot Usahawan:</strong> Walkabout ke 27 khemah Jualan Agro MADANI hadapan sekolah & 2 unit food truck.</li>
+                                    <li><strong>Bergerak ke Dewan:</strong> Disambut dengan <strong>Persembahan Tarian Singa</strong> di pintu masuk utama dewan.</li>
+                                    <li><strong>Lawatan Reruai Jabatan & Agensi:</strong> Melawat 11 booth pameran agensi (DOA, DOF, DVS, MARDI, LPP, LKIM, LPNM, Agrobank).</li>
+                                    <li><strong>Pertunjukan Gendang:</strong> Menyaksikan persembahan gendang berirama di pentas utama dewan.</li>
+                                    <li><strong>Sarapan Pagi Bersama Masyarakat:</strong> Sesi jamuan sarapan pagi, dialog santai & bergambar satu meja bersama komuniti.</li>
+                                </ul>
+                            </div>
+                            <span class="text-[11px] font-bold text-amber-900 bg-amber-200 px-2 py-1 rounded">Tindakan: JK Protokol & Pasukan Sambutan</span>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                            <span class="px-2.5 py-1 rounded bg-slate-200 text-slate-800 text-xs font-black">10.30 PG</span>
+                            <div class="flex-1 text-xs">
+                                <strong class="text-slate-900 text-sm">Selesai Majlis Lawatan Rasmi & Bersurai</strong>
+                                <p class="text-slate-600 mt-0.5">YB Menteri berlepas ke program seterusnya; Jualan Agro MADANI & sukan rakyat dam haji diteruskan hingga 12.00 tgh.</p>
+                            </div>
+                            <span class="text-[11px] font-bold text-slate-500">Tindakan: Floor Manager</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Dome vs Buffet Comparison (Slide 8) -->
+                <div class="mt-6 pt-5 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="text-xs font-black text-amber-900 uppercase tracking-wide flex items-center gap-1.5">
+                                <i class="fa-solid fa-crown text-amber-600"></i> Menu Sarapan VIP (Dome)
+                            </h4>
+                            <span class="text-[10px] font-bold text-amber-800 bg-amber-200 px-2 py-0.5 rounded">4 Meja Bulat VIP</span>
+                        </div>
+                        <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+                            <li>Bihun Goreng Istimewa</li>
+                            <li>Telur Dadar Daun Bawang</li>
+                            <li>Sambal Tumis Padu</li>
+                            <li>Kuih Bakar Manis</li>
+                            <li>Kuih Bakar Berlauk</li>
+                            <li>Air Kelapa Muda Segar</li>
+                            <li>Minuman Panas (Kopi / Teh O)</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="text-xs font-black text-emerald-900 uppercase tracking-wide flex items-center gap-1.5">
+                                <i class="fa-solid fa-users text-emerald-600"></i> Menu Sarapan Awam (Buffet)
+                            </h4>
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-2 py-0.5 rounded">36 Meja Komuniti / 500 Pax</span>
+                        </div>
+                        <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+                            <li>Bihun Goreng</li>
+                            <li>Cekodok Bilis Panas</li>
+                            <li>Kuih Manis Tradisional</li>
+                            <li>Keropok Lekor Goreng (Sumbangan DOF / LKIM)</li>
+                            <li>Buah Potong Segar (Sumbangan FAMA)</li>
+                            <li>Tembikai Segar</li>
+                            <li>Teh O Panas</li>
+                            <li class="text-emerald-700 font-bold">*Disediakan oleh pramusaji dari petugas FAMA.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kemudahan Logistik: Parking Tokong, APM, PDRM (Slide 7) -->
+                <div class="mt-6 pt-5 border-t border-slate-200">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-blue-600"></i> Kemudahan & Sokongan Operasi SJK(C) Keh Seng
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                            <strong class="text-slate-900 flex items-center gap-1.5 mb-1"><i class="fa-solid fa-square-parking text-blue-600"></i> Kawasan Letak Kenderaan</strong>
+                            <p class="text-slate-600">Kawasan parkir hadapan Tokong (bersebelahan) & Kawasan parkir Perpustakaan Awam Melaka.</p>
+                            <span class="inline-block mt-2 font-bold text-blue-700">Tindakan: RELA & PDRM</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                            <strong class="text-slate-900 flex items-center gap-1.5 mb-1"><i class="fa-solid fa-traffic-light text-amber-600"></i> Kawalan Trafik Jalan</strong>
+                            <p class="text-slate-600">Polis Trafik & RELA mengawal kelancaran Jalan Bukit Baru, keselamatan keluar-masuk kenderaan.</p>
+                            <span class="inline-block mt-2 font-bold text-amber-700">Tindakan: PDRM Trafik Melaka</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                            <strong class="text-slate-900 flex items-center gap-1.5 mb-1"><i class="fa-solid fa-truck-medical text-rose-600"></i> Paramedik & Kecemasan</strong>
+                            <p class="text-slate-600">Pasukan APM dan KKM bersiap sedia dengan unit ambulans di tapak untuk rawatan kecemasan.</p>
+                            <span class="inline-block mt-2 font-bold text-rose-700">Tindakan: APM & KKM Melaka</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price List & Free Giveaways (Slide 9) -->
+                <div class="mt-6 pt-5 border-t border-slate-200">
+                    <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-tags text-rose-500"></i> Senarai Harga Jualan Agro MADANI Bukit Katil & Promosi Khas
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Set Kombo Jimat</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 15.00 <span class="text-[10px] text-slate-400 line-through">RM32.50</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Daging Segar</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 27.00/kg <span class="text-[10px] text-slate-400 line-through">RM30.00</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Ayam Segar</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 7.00/kg <span class="text-[10px] text-slate-400 line-through">RM10.00</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Ikan Q'Fish</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 5.00/pek <span class="text-[10px] text-slate-400 line-through">RM10.00</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Kerang Segar</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 13.00/kg <span class="text-[10px] text-slate-400 line-through">RM18.00</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                            <p class="text-slate-500 text-[10px]">Telur Gred C (Papan)</p>
+                            <p class="font-black text-emerald-800 text-sm">RM 10.00 <span class="text-[10px] text-slate-400 line-through">RM14.00</span></p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300">
+                            <p class="text-amber-900 font-bold text-[10px]">300 Nanas MD2 Percuma</p>
+                            <p class="font-black text-amber-800 text-xs mt-0.5">Edaran Khas LPNM</p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300">
+                            <p class="text-amber-900 font-bold text-[10px]">100 Telur Percuma</p>
+                            <p class="font-black text-amber-800 text-xs mt-0.5">Terhad Pengunjung Awal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: TENTATIF PERASMIAN PM (25 OKT) ================= -->
+        <section id="tab-content-perasmian" class="tab-pane hidden flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">Acara Kemuncak Rasmi Mega</span>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Majlis Perasmian Semarak Tani @ Jualan Agro MADANI Mega</h2>
+                        <p class="text-xs text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i> Pentas Utama, Kolej Vokasional Melaka Tengah | Ahad, 25 Oktober 2026</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-xl text-center shadow-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-amber-100">Perasmi Utama</p>
+                        <p class="text-sm font-black">YAB DATO' SERI ANWAR BIN IBRAHIM</p>
+                        <p class="text-[10px] text-amber-100">Perdana Menteri Malaysia</p>
+                    </div>
+                </div>
+
+                <!-- Minute by minute timeline -->
+                <div class="mt-6 space-y-4">
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-300 transition">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-black whitespace-nowrap">10.30 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-slate-800">Ketibaan Dif-dif Jemputan</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Ketibaan Pegawai Kanan Kerajaan, Ketua-Ketua Agensi di bawah KPKM, Exco Kerajaan Negeri Melaka, dan Rakan Strategik FAMA.</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 whitespace-nowrap">Tindakan: JK Sambutan & Protokol FAMA</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-300 transition">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-black whitespace-nowrap">10.45 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-slate-800">Ketibaan YB Datuk Seri Haji Mohamad bin Sabu</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Menteri Pertanian dan Keterjaminan Makanan (KPKM) tiba di Bilik Menunggu VIP.</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 whitespace-nowrap">Tindakan: Pengerusi & KP FAMA</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-amber-50 border-2 border-amber-300 shadow-xs">
+                        <span class="px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-black whitespace-nowrap">11.00 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-black text-amber-900 flex items-center gap-2">
+                                <i class="fa-solid fa-crown text-amber-600"></i> Ketibaan YAB Dato' Seri Anwar bin Ibrahim
+                            </h4>
+                            <p class="text-xs text-slate-700 mt-0.5 font-medium">Perdana Menteri Malaysia tiba di Pentas Utama diiringi kawalan keselamatan PDRM & pimpinan tertinggi KPKM/FAMA.</p>
+                        </div>
+                        <span class="text-xs font-bold text-amber-900 bg-amber-100 px-2.5 py-1 rounded border border-amber-300 whitespace-nowrap">Tindakan: JK Protokol PM & PDRM</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-black whitespace-nowrap">11.10 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-slate-800">Tarian Selamat Datang & Lagu Kebangsaan/Negeri</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Persembahan tarian selamat datang traditional Melaka, nyanyian Lagu Negaraku & Melakaku Maju Jaya.</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 whitespace-nowrap">Tindakan: JK Persembahan & Audio</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-black whitespace-nowrap">11.15 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-slate-800">Bacaan Doa</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Bacaan doa pembuka majlis dan kesejahteraan ummah.</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 whitespace-nowrap">Tindakan: Pegawai Agama FAMA</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-black whitespace-nowrap">11.20 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-slate-800">Ucapan Alu-aluan oleh YB Menteri KPKM</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Ucapan oleh YB Datuk Seri Haji Mohamad bin Sabu, Menteri Pertanian dan Keterjaminan Makanan.</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 whitespace-nowrap">Tindakan: JK Teks Ucapan & Pengacaraan</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-emerald-50 border-2 border-emerald-300">
+                        <span class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-black whitespace-nowrap">11.25 Pagi</span>
+                        <div class="flex-1">
+                            <h4 class="text-sm font-black text-emerald-900">Ucapan Perasmian oleh YAB Perdana Menteri Malaysia</h4>
+                            <p class="text-xs text-slate-700 mt-0.5 font-medium">Amanat Perdana dan Ucapan Perasmian oleh YAB Dato' Seri Anwar bin Ibrahim.</p>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded border border-emerald-300 whitespace-nowrap">Tindakan: JK Protokol & Pejabat PM</span>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-amber-50 border border-amber-200">
+                        <span class="px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-black whitespace-nowrap">11.40 Pagi</span>
+                        <div class="flex-1 space-y-2">
+                            <h4 class="text-sm font-bold text-slate-900">Gimik Perasmian, Insentif Usahawan & Cabutan Bertuah</h4>
+                            <ul class="text-xs text-slate-700 list-disc list-inside space-y-1">
+                                <li><strong>Simbolik Gimik Hydrolic:</strong> Plug gimik berbentuk logo Karnival Jualan Agro MADANI dan hiasan buah-buahan tempatan pada platform hydrolic di pentas.</li>
+                                <li><strong>Pemberian Insentif:</strong> Sesi penyampaian geran/insentif Usahawan FAMA Negeri Melaka oleh YAB PM.</li>
+                                <li><strong>Cabutan Bertuah Utama:</strong> Cabutan hadiah utama berupa <strong>MOTORSIKAL</strong> dan <strong>TELEVISYEN</strong> kepada pengunjung bertuah.</li>
+                                <li><strong>Walkabout Reruai:</strong> Sesi lawatan YAB Perdana Menteri ke Kluster Pameran KPKM, Kluster IMAT, dan Jualan Segar.</li>
+                            </ul>
+                        </div>
+                        <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded border border-amber-300 whitespace-nowrap">Tindakan: JK Gimik, Hadiah & Pengiring</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: PELAN TAPAK & 100 LOT ================= -->
+        <section id="tab-content-tapak" class="tab-pane hidden flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">Spatial Layout & Lot Allocation</span>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Pelan Susun Atur Tapak (3.5 Ekar)</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Padang Kolej Vokasional Melaka Tengah (Lot 1421, Km 15, Jalan Pengkalan Balak, 75460 Melaka Tengah)</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-slate-500">Jumlah Kapasiti:</span>
+                        <p class="text-sm font-black text-slate-800">40 Khemah (20' x 20') • 100 Lot Jualan • 90 Usahawan/Agensi</p>
+                    </div>
+                </div>
+
+                <!-- Site Analysis Box from Slide 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Kelebihan Lokasi Kolej Vokasional
+                        </h4>
+                        <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+                            <li>Kawasan padang yang luas ($\pm$ 3.5 ekar).</li>
+                            <li>Tiada halangan bagi pembinaan pentas utama & khemah marquee.</li>
+                            <li>Tiada halangan lalulintas di laluan utama Jalan Pengkalan Balak.</li>
+                            <li>Ruang luas untuk pelbagai aktiviti interaktif, petting zoo, dan food truck.</li>
+                            <li>Kemudahan tandas lelaki & perempuan yang berdekatan.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-rose-50 border border-rose-200">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-800 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Kekurangan & Tindakan Kritikal
+                        </h4>
+                        <div class="text-xs text-slate-700 space-y-2">
+                            <p><strong>Isu:</strong> Kawasan padang terbuka tiada pagar kawalan perimeter.</p>
+                            <p class="p-2 bg-white rounded-lg border border-rose-200 font-medium text-rose-900">
+                                <strong>TINDAKAN OLEH: JK Logistik, Tapak & Keselamatan FAMA</strong><br>
+                                Wajib membina pagar tambahan (temporary crowd control fencing) bagi memudahkan pergerakan kawalan keluar-masuk 25,000 pengunjung dan kawalan keselamatan VIP.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table of Clusters from Slide 5 -->
+                <div class="mt-6">
+                    <h3 class="text-sm font-black text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-table-cells-large text-emerald-600"></i> Pecahan Butiran 100 Lot Jualan Mengikut Kluster
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-black border-b border-slate-200">
+                                <tr>
+                                    <th class="p-3">Bil</th>
+                                    <th class="p-3">Kluster Acara</th>
+                                    <th class="p-3 text-center">Bil. Khemah</th>
+                                    <th class="p-3 text-center">Jumlah Lot</th>
+                                    <th class="p-3 text-center">Usahawan / Agensi</th>
+                                    <th class="p-3">Kadar Sewaan</th>
+                                    <th class="p-3">Tindakan / Penyelaras Kluster</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">1</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-blue-500 inline-block mr-1.5"></span>Kluster Pameran KPKM & Agensi</td>
+                                    <td class="p-3 text-center">6</td>
+                                    <td class="p-3 text-center font-bold">12</td>
+                                    <td class="p-3 text-center">12 Agensi</td>
+                                    <td class="p-3 font-semibold text-slate-500">Disediakan (Agensi)</td>
+                                    <td class="p-3 font-bold text-blue-700">JK Pameran KPKM (DOA, DVS, DOF, MARDI, dll)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">2</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block mr-1.5"></span>Jualan Agro MADANI & Buah-buahan</td>
+                                    <td class="p-3 text-center">8</td>
+                                    <td class="p-3 text-center font-bold">16</td>
+                                    <td class="p-3 text-center">16 Usahawan</td>
+                                    <td class="p-3 font-semibold text-emerald-700">RM 250 / Lot</td>
+                                    <td class="p-3 font-bold text-emerald-700">JK Pemasaran Segar FAMA Melaka</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">3</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block mr-1.5"></span>Kluster IMAT (Industri Makanan Asas Tani)</td>
+                                    <td class="p-3 text-center">8</td>
+                                    <td class="p-3 text-center font-bold">16</td>
+                                    <td class="p-3 text-center">16 Usahawan</td>
+                                    <td class="p-3 font-semibold text-emerald-700">RM 250 / Lot</td>
+                                    <td class="p-3 font-bold text-amber-700">JK Industri Makanan (IMAT) Melaka</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">4</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-orange-500 inline-block mr-1.5"></span>Makanan Popular (Food Empire)</td>
+                                    <td class="p-3 text-center">12</td>
+                                    <td class="p-3 text-center font-bold">24</td>
+                                    <td class="p-3 text-center">24 Usahawan</td>
+                                    <td class="p-3 font-semibold text-emerald-700">RM 250 / Lot</td>
+                                    <td class="p-3 font-bold text-orange-700">JK Usahawan Makanan Popular</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">5</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-purple-500 inline-block mr-1.5"></span>Kluster Florikultur & Petting Zoo</td>
+                                    <td class="p-3 text-center">6</td>
+                                    <td class="p-3 text-center font-bold">12</td>
+                                    <td class="p-3 text-center">6 Usahawan</td>
+                                    <td class="p-3 font-semibold text-emerald-700">RM 250 / Lot</td>
+                                    <td class="p-3 font-bold text-purple-700">JK Florikultur Negeri Melaka</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">6</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-teal-500 inline-block mr-1.5"></span>Karavan / Food Truck</td>
+                                    <td class="p-3 text-center">-</td>
+                                    <td class="p-3 text-center font-bold">5</td>
+                                    <td class="p-3 text-center">5 Usahawan</td>
+                                    <td class="p-3 font-semibold text-teal-700">RM 200 / Lot</td>
+                                    <td class="p-3 font-bold text-teal-700">JK Karavan & Food Truck FAMA</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-3 font-bold">7</td>
+                                    <td class="p-3 font-bold text-slate-900"><span class="w-2 h-2 rounded-full bg-rose-500 inline-block mr-1.5"></span>Jualan Agro MADANI (10 x 10) Kombo</td>
+                                    <td class="p-3 text-center">15 Unit</td>
+                                    <td class="p-3 text-center font-bold">15</td>
+                                    <td class="p-3 text-center">11 Usahawan</td>
+                                    <td class="p-3 font-semibold text-emerald-700">RM 250 / Lot</td>
+                                    <td class="p-3 font-bold text-rose-700">JK Pengurusan Jualan Kombo</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-slate-50 font-black text-slate-900 border-t border-slate-200">
+                                <tr>
+                                    <td colspan="2" class="p-3 text-right">JUMLAH KESELURUHAN:</td>
+                                    <td class="p-3 text-center text-emerald-700 font-extrabold">40 KHEMAH (20' x 20')</td>
+                                    <td class="p-3 text-center text-emerald-700 font-extrabold">100 LOT</td>
+                                    <td class="p-3 text-center text-emerald-700 font-extrabold">90 USAHAWAN / AGENSI</td>
+                                    <td colspan="2" class="p-3 text-slate-500 text-[11px] font-normal">Kadar sewa: RM250/lot (RM200 bagi Food Truck)</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: IMPLIKASI KEWANGAN (BAJET RM300K) ================= -->
+        <section id="tab-content-kewangan" class="tab-pane hidden flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200">Pecahan Bajet Rasmi</span>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Implikasi Kewangan Program (RM 300,000.00)</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Semarak Tani @ Jualan Agro MADANI Mega Melaka | Peruntukan KPKM & FAMA</p>
+                    </div>
+                    <div class="bg-purple-900 text-white px-4 py-2.5 rounded-xl text-right shadow-sm">
+                        <span class="text-[10px] text-purple-300 font-bold uppercase tracking-wider">Jumlah Keseluruhan</span>
+                        <p class="text-xl font-black">RM 300,000.00</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                    <!-- Item 1 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-black text-xs">01</span>
+                                <span class="text-base font-black text-blue-700">RM 140,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Penyediaan Pelbagai Infra, Pentas Utama & Siaraya</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Pentas utama, siaraya & struktur sokongan</li>
+                                <li>Sistem bunyi (PA), pencahayaan & pendawaian elektrik</li>
+                                <li>Kemudahan tapak, 40 unit khemah 20x20, kerusi meja</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-blue-700">
+                            Tindakan: Unit Kejuruteraan & Logistik FAMA
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-rose-600 text-white flex items-center justify-center font-black text-xs">02</span>
+                                <span class="text-base font-black text-rose-700">RM 15,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Majlis Perasmian, Gimik, Publisiti & Hebahan</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Gimik pelancaran hydrolic & plug logo</li>
+                                <li>Pengiklanan media cetak, digital & media sosial</li>
+                                <li>Permit PBT & permit kelulusan PDRM</li>
+                                <li>Cetakan banner, bunting & signage tapak</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-rose-700">
+                            Tindakan: Unit Komunikasi Korporat FAMA
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-black text-xs">03</span>
+                                <span class="text-base font-black text-emerald-700">RM 60,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Tampungan Jualan Agro MADANI (Subsidi Kombo)</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Hari Pertama: RM 15,000 (Ayam + Telur + Kombo)</li>
+                                <li>Hari Kedua: RM 15,000 (Ayam + Telur + Kombo)</li>
+                                <li>Hari Ketiga: RM 30,000 (Ayam + Telur + Kombo + Happy Hour)</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-emerald-700">
+                            Tindakan: Cawangan Pemasaran Segar FAMA
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center font-black text-xs">04</span>
+                                <span class="text-base font-black text-amber-700">RM 25,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Pembersihan, Keselamatan, Makanan VIP & Kupon</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Bayaran elaun RELA & kontraktor pembersihan</li>
+                                <li>Tong sampah roro, sanitasi tandas</li>
+                                <li>Makan & minum VIP serta penginapan pegawai</li>
+                                <li>Kupon makan Pocket Talk & petugas acara</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-amber-700">
+                            Tindakan: JK Pentadbiran & Keselamatan FAMA
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center font-black text-xs">05</span>
+                                <span class="text-base font-black text-purple-700">RM 11,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Aktiviti Interaktif & Galakan Pengunjung</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Zumba tema Kain Batik / Sarung</li>
+                                <li>Hadiah Pertandingan Kahoot! (Siri 1 & 2)</li>
+                                <li>Hadiah E-Football / E-Sport & Mewarna</li>
+                                <li>Hadiah Pertandingan Sukan Tradisional</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-purple-700">
+                            Tindakan: JK Aktiviti Komuniti & Belia
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-xs">06</span>
+                                <span class="text-base font-black text-indigo-700">RM 49,000</span>
+                            </div>
+                            <h4 class="text-xs font-extrabold text-slate-900 uppercase">Aktiviti Pentas Utama, Artis & Hadiah Utama</h4>
+                            <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc list-inside">
+                                <li>Malam Berselawat bersama Hijjaz & UNIC</li>
+                                <li>Penampilan Khas Power Suria FM</li>
+                                <li>Persembahan Black Buskers & Deejay Pengacara</li>
+                                <li>Cabutan Bertuah Utama: <strong>MOTORSIKAL & TELEVISYEN</strong></li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-bold text-indigo-700">
+                            Tindakan: JK Pentas Utama & Penajaan Hadiah
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 6: SUBSIDI JUALAN KOMBO ================= -->
+        <section id="tab-content-kombo" class="tab-pane hidden flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-1 rounded-md border border-rose-200">Inisiatif Kesejahteraan Rakyat MADANI</span>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Tawaran Istimewa Jualan Kombo Semarak Tani</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Penjimatan dan tampungan subsidi harga barangan asas sehingga 30% - 50%</p>
+                    </div>
+                    <div class="bg-rose-600 text-white px-3.5 py-2 rounded-xl text-center shadow-sm">
+                        <span class="text-[10px] font-bold uppercase tracking-wider">Peruntukan Subsidi</span>
+                        <p class="text-base font-black">RM 60,000.00</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
+                    <!-- Kombo 1 -->
+                    <div class="bg-gradient-to-b from-amber-50 to-white rounded-2xl p-5 border-2 border-amber-300 shadow-xs flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-extrabold text-amber-900 bg-amber-200 px-2.5 py-1 rounded-full">23 & 24 OKT (JUM & SAB)</span>
+                                <span class="text-xs font-bold text-slate-500">1,000 Set Sehari</span>
+                            </div>
+                            <h3 class="text-base font-black text-slate-900 mt-2">Kombo Semarak Tani Sayur & Telur</h3>
+                            <div class="mt-3 p-3 bg-white rounded-xl border border-amber-200 text-xs text-slate-700 space-y-1">
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Telur 1 Papan (30 biji)</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Bawang Merah</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Bawang Besar</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Bawang Putih</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Kentang</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-amber-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 line-through">RM 24.50</span>
+                                <p class="text-xl font-black text-emerald-700">RM 10.00</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-amber-900 bg-amber-100 px-2 py-1 rounded border border-amber-300">Tindakan: Unit Pemasaran FAMA</span>
+                        </div>
+                    </div>
+
+                    <!-- Kombo 2 -->
+                    <div class="bg-gradient-to-b from-rose-50 to-white rounded-2xl p-5 border-2 border-rose-300 shadow-xs flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-extrabold text-rose-900 bg-rose-200 px-2.5 py-1 rounded-full">23 - 25 OKT (3 HARI)</span>
+                                <span class="text-xs font-bold text-slate-500">500 Set Sahaja</span>
+                            </div>
+                            <h3 class="text-base font-black text-slate-900 mt-2">Kombo Sardin Agromas</h3>
+                            <div class="mt-3 p-3 bg-white rounded-xl border border-rose-200 text-xs text-slate-700 space-y-1">
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Sardin Agromas 425g (Tin 1)</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Sardin Agromas 425g (Tin 2)</p>
+                                <p class="text-slate-400 text-[11px] pt-1">*Keluaran jenama berkualiti FAMA Malaysia</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-rose-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 line-through">RM 17.00</span>
+                                <p class="text-xl font-black text-rose-700">RM 10.00</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-rose-900 bg-rose-100 px-2 py-1 rounded border border-rose-300">Tindakan: Cawangan Agromas Melaka</span>
+                        </div>
+                    </div>
+
+                    <!-- Kombo 3 -->
+                    <div class="bg-gradient-to-b from-emerald-50 to-white rounded-2xl p-5 border-2 border-emerald-400 shadow-xs flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-extrabold text-emerald-900 bg-emerald-200 px-2.5 py-1 rounded-full">25 OKTOBER (AHAD SAHAJA)</span>
+                                <span class="text-xs font-bold text-slate-500">1,000 Set Sahaja</span>
+                            </div>
+                            <h3 class="text-base font-black text-slate-900 mt-2">Kombo Semarak Tani Ayam & Telur</h3>
+                            <div class="mt-3 p-3 bg-white rounded-xl border border-emerald-200 text-xs text-slate-700 space-y-1">
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Ayam Segar 1 Ekor</p>
+                                <p><i class="fa-solid fa-check text-emerald-600 mr-1.5"></i> Telur 1 Papan (30 Biji)</p>
+                                <p class="text-emerald-700 text-[11px] font-bold pt-1">*Istimewa Hari Perasmian Perdana Menteri!</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-emerald-200 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400 line-through">RM 32.50</span>
+                                <p class="text-xl font-black text-emerald-700">RM 15.00</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-900 bg-emerald-100 px-2 py-1 rounded border border-emerald-300">Tindakan: Bahagian Ternakan & FAMA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 7: USAHAWAN MAKANAN POPULAR & FOOD TRUCK ================= -->
+        <section id="tab-content-usahawan" class="tab-pane hidden flex flex-col gap-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-orange-700 bg-orange-50 px-2.5 py-1 rounded-md border border-orange-200">Kluster Gastronomi & Makanan</span>
+                        <h2 class="text-xl font-black text-slate-900 mt-1">Direktori 11 Usahawan Makanan Popular & 5 Food Truck</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Zon Food Empire (12 Khemah / 24 Lot) & Zon Food Truck (5 Petak)</p>
+                    </div>
+                    <span class="text-xs font-bold text-orange-800 bg-orange-100 px-3 py-1.5 rounded-lg border border-orange-200">Tindakan Penyelaras: JK Kluster Makanan FAMA</span>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-sm font-extrabold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-fire-burner text-rose-500"></i> 11 Usahawan Makanan Popular (Menu Terpilih)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">01</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Patin Tempoyak Sg Pahang</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Patin tempoyak asli Sg Pahang, nasi putih, timun segar & sambal padu.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">02</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Skewer R&R</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Skewer ayam, daging batang pinang & kambing lembut berempah.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">03</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Abang Amy Kopi Ais</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Kopi ais kaw (RM5), green tea (RM6), tea ais kaw/coklat ais kaw (RM7).</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">04</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Jai Station Avocado</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Avocado shake mangga, watermelon, coklat ais & original berkrim.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">05</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Mee Bandung Rembulan</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Mee bandung kuah pekat memikat, udang segar bermutu dan daging empuk.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">06</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Pak Lang Sup Utara</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Sup utara daging (RM10), ayam (RM8), daging perut (RM20), perut keting (RM25).</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">07</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Dapur Suecca</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Laksa Sarawak asli, mee kolok & kek lapis Sarawak istimewa.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">08</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Teh Ais Madu 3</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">100% madu, zero sugar, pelbagai perisa istimewa menyegarkan.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">09</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Asam Pedas Melaka</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">"Best of the Best Melaka" rempah asli Melaka, ikan segar setiap hari.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">10</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Anip Char Kuey Teow</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Wok panas berapi! Char kuey teow penuh udang segar, sotong dan kerang.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="text-[10px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded">11</span>
+                            <h4 class="text-xs font-extrabold text-slate-900 mt-1">Paknil's BBQ & Grill</h4>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Pilihan daging ayam, lembu, kambing & sosej panggang dengan sos BBQ rahsia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-5 border-t border-slate-200">
+                    <h3 class="text-sm font-extrabold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-truck text-emerald-600"></i> 5 Usahawan Karavan / Food Truck
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">FT 01</span>
+                            <h5 class="text-xs font-black text-slate-900 mt-1">FT Coconut Shake</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Kelapa asli segar pelbagai perisa.</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">FT 02</span>
+                            <h5 class="text-xs font-black text-slate-900 mt-1">Markisa Drink</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Minuman buah markisa segar & soda.</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">FT 03</span>
+                            <h5 class="text-xs font-black text-slate-900 mt-1">Nasi Lemak Kak Sue</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Nasi lemak lauk, popia & waffle.</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">FT 04</span>
+                            <h5 class="text-xs font-black text-slate-900 mt-1">Nasi Ayam Gemas</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Nasi ayam gemas & aneka sup lazat.</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">FT 05</span>
+                            <h5 class="text-xs font-black text-slate-900 mt-1">Syafikah Chickfiniti</h5>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Ayam goreng rangup & menu western.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="no-print mt-auto py-4 bg-white border-t border-slate-200 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p class="font-bold text-slate-700">© Lembaga Pemasaran Pertanian Persekutuan (FAMA) & Kementerian Pertanian dan Keterjaminan Makanan (KPKM)</p>
+            <p class="text-slate-500">SOP Pelan Tindakan Pelaksana • Semarak Tani @ Jualan Agro MADANI Melaka 2026</p>
+        </div>
+    </footer>
+
+    <!-- Add Task Modal with TINDAKAN / BY WHOM Input -->
+    <div id="add-task-modal" class="no-print fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 flex flex-col gap-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <h3 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-plus"></i>
+                    </span>
+                    Tambah Tindakan / Tugasan Baru
+                </h3>
+                <button onclick="closeAddTaskModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Pilih Fasa Acara <span class="text-rose-500">*</span></label>
+                    <select id="modal-phase-select" class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none">
+                        <!-- Populated in JS -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Seksyen / Kluster <span class="text-rose-500">*</span></label>
+                    <input type="text" id="modal-section-input" placeholder="e.g. SJK(C) Keh Seng / Kawalan Trafik / Khemah IMAT" class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Tindakan / By Whom (Jawatankuasa) <span class="text-rose-500">*</span></label>
+                        <input type="text" id="modal-pic-input" placeholder="e.g. JK Protokol YBM / PDRM Trafik / LPNM" class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Masa / Tarikh Sasaran</label>
+                        <input type="text" id="modal-time-input" placeholder="e.g. 08:30 Pagi / 24 Okt" class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Zon / Lokasi Tapak</label>
+                    <input type="text" id="modal-zone-input" placeholder="e.g. SJK(C) Keh Seng / Pentas Utama / Pintu Masuk" class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Keterangan Tindakan / SOP <span class="text-rose-500">*</span></label>
+                    <textarea id="modal-task-input" rows="3" placeholder="Nyatakan arahan pelaksanaan tindakan dengan terperinci..." class="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-fama-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                <button onclick="closeAddTaskModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition">Batal</button>
+                <button onclick="saveCustomTask()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg transition shadow-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-check text-xs"></i> Simpan Tindakan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="no-print fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs border border-slate-700 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toast-message">Operasi berjaya dilaksanakan.</span>
+    </div>
+
+    <!-- Application Script with Full PDF Event Matrix & Tindakan -->
+    <script>
+        const semarakTaniMasterData = [
+            {
+                id: 'p_kehseng',
+                title: 'Program Khas 24 Okt: Lawatan YB Menteri KPKM @ SJK(C) Keh Seng (Half-Day)',
+                shortTitle: '24 Okt: SJK(C) Keh Seng',
+                icon: 'fa-school',
+                color: 'bg-amber-600',
+                durations: ['half_24', '3day', '2day'],
+                sections: [
+                    {
+                        subtitle: '1. Persediaan Tapak, Khemah Jualan & Pameran Agensi',
+                        tasks: [
+                            {
+                                id: 'ks_s0_t0',
+                                text: 'Setup 27 unit khemah saiz 10\' x 10\' untuk Zon Jualan Agro MADANI di perkarangan hadapan sekolah SJK(C) Keh Seng.',
+                                tindakan: 'JK Logistik & Tapak FAMA Melaka',
+                                masa: 'D-1 (23 Okt)',
+                                zon: 'Hadapan SJK(C) Keh Seng'
+                            },
+                            {
+                                id: 'ks_s0_t1',
+                                text: 'Penempatan 2 unit Food Truck di perkarangan sekolah berdekatan laluan masuk dewan.',
+                                tindakan: 'JK Food Truck FAMA',
+                                masa: '07:00 PG (24 Okt)',
+                                zon: 'Perkarangan Sekolah'
+                            },
+                            {
+                                id: 'ks_s0_t2',
+                                text: 'Penyediaan Zon Pameran Bomba di kawasan parkir berhampiran pintu masuk utama dewan.',
+                                tindakan: 'Jabatan Bomba & Penyelamat Melaka',
+                                masa: '07:30 PG (24 Okt)',
+                                zon: 'Parkir Pintu Masuk Dewan'
+                            },
+                            {
+                                id: 'ks_s0_t3',
+                                text: 'Setup 11 lot booth pameran dalam Dewan SJK(C) Keh Seng untuk 9 Agensi KPKM (DOA, DOF, DVS, MARDI, LPP, LKIM, LPNM, FAMA, Agrobank).',
+                                tindakan: 'Penyelaras Pameran 9 Agensi KPKM',
+                                masa: 'D-1 (23 Okt, 18:00)',
+                                zon: 'Dalam Dewan Keh Seng'
+                            },
+                            {
+                                id: 'ks_s0_t4',
+                                text: 'Penyediaan 3 Meja Pertandingan Dam Haji bagi Zon Sukan Rakyat di dalam dewan.',
+                                tindakan: 'JK Sukan Rakyat & Belia Bukit Katil',
+                                masa: '07:30 PG (24 Okt)',
+                                zon: 'Zon Sukan Rakyat Dewan'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. Jamuan Sarapan Pagi YBM Bersama Masyarakat (Dewan)',
+                        tasks: [
+                            {
+                                id: 'ks_s1_t0',
+                                text: 'Susun atur 4 Meja Bulat VIP (Ruang Makan VIP berkerusi banquet) dan 36 Meja Sarapan Masyarakat di tengah dewan.',
+                                tindakan: 'JK Dewan & Logistik SJK(C) Keh Seng',
+                                masa: 'D-1 (23 Okt)',
+                                zon: 'Dewan SJK(C) Keh Seng'
+                            },
+                            {
+                                id: 'ks_s1_t1',
+                                text: 'Penyediaan Sajian VIP (Dome): Bihun goreng, telur dadar, sambal, kuih bakar manis, kuih bakar berlauk, air kelapa muda, dan teh/kopi panas.',
+                                tindakan: 'JK Jamuan VIP FAMA',
+                                masa: '08:30 PG (24 Okt)',
+                                zon: 'Ruang Makan VIP Dewan'
+                            },
+                            {
+                                id: 'ks_s1_t2',
+                                text: 'Penyediaan Sajian Awam (Buffet 2 lokasi memanjang): Bihun goreng, cekodok bilis, kuih manis, keropok lekor (DOF/LKIM), buah potong (FAMA), tembikai & teh O.',
+                                tindakan: 'Pramusaji Petugas FAMA',
+                                masa: '08:30 PG (24 Okt)',
+                                zon: 'Meja Buffet Dewan'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '3. Kawalan Trafik, Parkir Tokong & Paramedik Kecemasan',
+                        tasks: [
+                            {
+                                id: 'ks_s2_t0',
+                                text: 'Penyelarasan kawasan parkir hadapan Tokong (bersebelahan) dan parkir Perpustakaan Awam Melaka untuk pengunjung & dif.',
+                                tindakan: 'JK Parkir & RELA Bukit Katil',
+                                masa: '07:00 PG (24 Okt)',
+                                zon: 'Parkir Tokong & Perpustakaan'
+                            },
+                            {
+                                id: 'ks_s2_t1',
+                                text: 'Kawalan kelancaran lalu lintas di Jalan Bukit Baru dan pengurusan kenderaan keluar-masuk oleh Polis Trafik dan RELA.',
+                                tindakan: 'PDRM Trafik Melaka & RELA',
+                                masa: '07:30 PG (24 Okt)',
+                                zon: 'Laluan Jalan Bukit Baru'
+                            },
+                            {
+                                id: 'ks_s2_t2',
+                                text: 'Penempatan pasukan paramedik dan ambulans bersiap sedia untuk rawatan kecemasan asas dengan kerjasama KKM dan APM.',
+                                tindakan: 'APM Melaka & KKM',
+                                masa: '07:30 PG (24 Okt)',
+                                zon: 'Zon Paramedik Tapak'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '4. Atur Cara Protokol Lawatan YB Menteri KPKM (08:00 - 10:30)',
+                        tasks: [
+                            {
+                                id: 'ks_s3_t0',
+                                text: '08:00 PG: Pembukaan kaunter Jualan Agro MADANI Bukit Katil (Kombo RM15, Daging RM27/kg, Ayam RM7/kg, Ikan RM5, Telur RM10).',
+                                tindakan: 'JK Jualan Agro MADANI Melaka',
+                                masa: '08:00 PG',
+                                zon: 'Hadapan Sekolah'
+                            },
+                            {
+                                id: 'ks_s3_t1',
+                                text: '08:00 PG: Pengagihan 300 biji nanas MD2 percuma oleh LPNM (terhad 300 terawal) dan 100 papan telur percuma.',
+                                tindakan: 'LPNM & Cawangan FAMA',
+                                masa: '08:00 PG',
+                                zon: 'Kaunter Promosi Hadapan'
+                            },
+                            {
+                                id: 'ks_s3_t2',
+                                text: '08:30 PG: Ketibaan Dif-dif Jemputan, Ketua Agensi KPKM, Pemimpin Komuniti Bukit Katil (Sasaran: 500 orang).',
+                                tindakan: 'JK Sambutan FAMA',
+                                masa: '08:30 PG',
+                                zon: 'Dewan Keh Seng'
+                            },
+                            {
+                                id: 'ks_s3_t3',
+                                text: '08:40 PG: Ketibaan YBrs. Tuan Haji Abang Ahmad Kerdee bin Abang Masagus (Pengerusi FAMA) - Baju Korporat (Putih).',
+                                tindakan: 'Pengarah FAMA Negeri Melaka',
+                                masa: '08:40 PG',
+                                zon: 'Pintu Masuk Utama'
+                            },
+                            {
+                                id: 'ks_s3_t4',
+                                text: '09:00 PG: Sambut Ketibaan YB Datuk Seri Haji Mohamad bin Sabu (Menteri Pertanian dan Keterjaminan Makanan).',
+                                tindakan: 'Pengerusi & Pengurusan Tertinggi FAMA',
+                                masa: '09:00 PG',
+                                zon: 'Perkarangan Sekolah'
+                            },
+                            {
+                                id: 'ks_s3_t5',
+                                text: '09:05 PG: Sesi Walkabout YB Menteri KPKM melawat 27 khemah usahawan Jualan Agro MADANI & food truck.',
+                                tindakan: 'JK Pengiring VIP & Kawalan PDRM',
+                                masa: '09:05 PG',
+                                zon: 'Zon Jualan Luar'
+                            },
+                            {
+                                id: 'ks_s3_t6',
+                                text: '09:25 PG: YB Menteri bergerak ke dewan disambut dengan PERSEMBAHAN TARIAN SINGA di pintu masuk utama dewan.',
+                                tindakan: 'Pasukan Tarian Singa Keh Seng & JK Kesenian',
+                                masa: '09:25 PG',
+                                zon: 'Pintu Masuk Dewan'
+                            },
+                            {
+                                id: 'ks_s3_t7',
+                                text: '09:35 PG: Lawatan YB Menteri ke 11 reruai agensi KPKM di dalam dewan & menyaksikan Pertandingan Dam Haji.',
+                                tindakan: 'Penyelaras Pameran Agensi',
+                                masa: '09:35 PG',
+                                zon: 'Dewan Pameran'
+                            },
+                            {
+                                id: 'ks_s3_t8',
+                                text: '09:55 PG: PERTUNJUKAN GENDANG di Pentas Utama Dewan mengiringi YB Menteri ke Ruang Makan VIP.',
+                                tindakan: 'Pasukan Gendang Keh Seng & JK Pentas',
+                                masa: '09:55 PG',
+                                zon: 'Pentas Utama Dewan'
+                            },
+                            {
+                                id: 'ks_s3_t9',
+                                text: '10:00 PG: Sesi Sarapan Pagi YBM Bersama Masyarakat, dialog ramah mesra & bergambar satu meja.',
+                                tindakan: 'JK Protokol & Pengacaraan FAMA',
+                                masa: '10:00 PG',
+                                zon: 'Ruang Makan VIP Dewan'
+                            },
+                            {
+                                id: 'ks_s3_t10',
+                                text: '10:30 PG: YB Menteri bersurai; program jualan dan aktiviti dam haji diteruskan hingga 12.00 tgh.',
+                                tindakan: 'Floor Manager SJK(C) Keh Seng',
+                                masa: '10:30 PG',
+                                zon: 'Seluruh Tapak'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'p1',
+                title: 'Fasa 1: Pra-Acara, Logistik Tapak & Protokol @ Kolej Vokasional (D-7 hingga D-1)',
+                shortTitle: 'Fasa 1: Pra-Acara & Logistik KV',
+                icon: 'fa-tents',
+                color: 'bg-emerald-700',
+                durations: ['half_25', '1day', '2day', '3day'],
+                sections: [
+                    {
+                        subtitle: '1. Pengurusan Tapak & Infra (Padang 3.5 Ekar KV)',
+                        tasks: [
+                            {
+                                id: 'p1_s0_t0',
+                                text: 'Selesaikan kebenaran penggunaan tapak Padang Kolej Vokasional Melaka Tengah (Lot 1421, Km 15, Jalan Pengkalan Balak, Melaka Tengah).',
+                                tindakan: 'JK Tapak & Pentadbiran FAMA Melaka',
+                                masa: 'D-14',
+                                zon: 'Kolej Vokasional'
+                            },
+                            {
+                                id: 'p1_s0_t1',
+                                text: 'TINDAKAN KRITIKAL: Bina pagar tambahan (temporary crowd control fencing) di perimeter padang 3.5 ekar bagi mengawal aliran 25,000 pengunjung & zon keselamatan VIP.',
+                                tindakan: 'JK Logistik, Tapak & Keselamatan FAMA',
+                                masa: 'D-3',
+                                zon: 'Perimeter Padang KV'
+                            },
+                            {
+                                id: 'p1_s0_t2',
+                                text: 'Pasang 40 unit khemah saiz 20\' x 20\' untuk menempatkan 100 Lot Jualan (Pameran KPKM, JAM, IMAT, Makanan Popular, Florikultur & Petting Zoo) mengikut pelan spatial.',
+                                tindakan: 'JK Logistik & Kontraktor Khemah',
+                                masa: 'D-2',
+                                zon: 'Padang Utama KV'
+                            },
+                            {
+                                id: 'p1_s0_t3',
+                                text: 'Pasang pendawaian elektrik, genset sokongan, pencahayaan tapak dan punca kuasa chiller untuk zon basah & food truck (Peruntukan Bajet RM140,000).',
+                                tindakan: 'Unit Kejuruteraan FAMA & TNB',
+                                masa: 'D-2',
+                                zon: 'Pentas & Khemah Lot'
+                            },
+                            {
+                                id: 'p1_s0_t4',
+                                text: 'Setup Pentas Utama, sistem bunyi (PA), lighting, dan pemasangan Paparan Screen LED Depan saiz 1920mm x 1080mm (Full HD 16:9).',
+                                tindakan: 'JK Siaraya & Teknikal Pentas',
+                                masa: 'D-1 (14:00)',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p1_s0_t5',
+                                text: 'Uji platform hydrolic untuk Plug Gimik berbentuk logo Karnival Jualan Agro MADANI dan hiasan buah-buahan tempatan.',
+                                tindakan: 'JK Gimik Perasmian & Kejuruteraan',
+                                masa: 'D-1 (17:00)',
+                                zon: 'Pentas Utama KV'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. Protokol VVIP Perdana Menteri & Menteri KPKM',
+                        tasks: [
+                            {
+                                id: 'p1_s1_t0',
+                                text: 'Sediakan dan muktamadkan Susunan Keutamaan Protokol Persekutuan & Negeri untuk YAB Perdana Menteri Dato\' Seri Anwar Ibrahim dan YB Menteri KPKM Datuk Seri Mohamad Sabu.',
+                                tindakan: 'JK Protokol FAMA & Bahagian Protokol JPM',
+                                masa: 'D-7',
+                                zon: 'Bilik Menunggu VIP'
+                            },
+                            {
+                                id: 'p1_s1_t1',
+                                text: 'Sediakan Bilik Menunggu VIP eksklusif di belakang pentas lengkap dengan pendingin hawa, sofa, hidangan buah tempatan, dan ruang solat.',
+                                tindakan: 'JK Sambutan & Protokol FAMA',
+                                masa: 'D-1',
+                                zon: 'Bilik Menunggu VIP'
+                            },
+                            {
+                                id: 'p1_s1_t2',
+                                text: 'Selaras dengan PDRM & Trafik Kontinjen Melaka untuk laluan konvoi VIP dari lebuhraya ke Jalan Pengkalan Balak serta zon parkir khas VIP di belakang pentas.',
+                                tindakan: 'JK Keselamatan & PDRM Trafik',
+                                masa: 'D-2',
+                                zon: 'Laluan Masuk & Parkir VIP'
+                            },
+                            {
+                                id: 'p1_s1_t3',
+                                text: 'Keluarkan pas kenderaan VIP, pas media massa, dan lencana petugas acara.',
+                                tindakan: 'Unit Komunikasi Korporat FAMA',
+                                masa: 'D-2',
+                                zon: 'Urus Setia'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '3. Penyelarasan Kluster Lot & Subsidi Jualan Kombo (RM60,000)',
+                        tasks: [
+                            {
+                                id: 'p1_s2_t0',
+                                text: 'Kutipan bayaran sewa 100 lot (RM250/lot jualan, RM200/lot food truck) dan taklimat peraturan kebersihan kepada 90 usahawan.',
+                                tindakan: 'Unit Kewangan & Hal Ehwal Usahawan',
+                                masa: 'D-2',
+                                zon: 'Urus Setia Lot'
+                            },
+                            {
+                                id: 'p1_s2_t1',
+                                text: 'Kunci bekalan stok Kombo Semarak Tani RM10 (telur 1 papan, bawang merah, bawang putih, bawang besar, kentang - 1,000 set/hari).',
+                                tindakan: 'Cawangan Pemasaran Segar FAMA',
+                                masa: 'D-1',
+                                zon: 'Khemah JAM Segar'
+                            },
+                            {
+                                id: 'p1_s2_t2',
+                                text: 'Susun atur tapak 11 Usahawan Makanan Popular (Patin Tempoyak, Sup Utara, Asam Pedas, dll) & 5 Karavan Food Truck.',
+                                tindakan: 'JK Kluster Makanan & Food Truck',
+                                masa: 'D-1 (15:00)',
+                                zon: 'Food Empire & Karavan'
+                            },
+                            {
+                                id: 'p1_s2_t3',
+                                text: 'Penyediaan tapak 12 Agensi KPKM (DOA, DVS, DOF, MARDI, LPP, LKIM, KADA, MPIB, Agrobank) untuk demo drone, kuiz, dan khidmat nasihat.',
+                                tindakan: 'Penyelaras Pameran Agensi KPKM',
+                                masa: 'D-1',
+                                zon: 'Khemah Pameran 1-6'
+                            },
+                            {
+                                id: 'p1_s2_t4',
+                                text: 'Penyediaan sangkar dan permit veterinar bagi Mini Petting Zoo (arnab & kambing) serta tapak jualan tanaman hiasan.',
+                                tindakan: 'JK Florikultur & Petting Zoo (Melaka)',
+                                masa: 'D-1 (16:00)',
+                                zon: 'Khemah Florikultur'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '4. Publisiti, Sanitasi & Hadiah Cabutan Bertuah',
+                        tasks: [
+                            {
+                                id: 'p1_s3_t0',
+                                text: 'Edarkan Poster Utama A3, gantung Bunting Hebahan (600x1800mm) di sekitar Melaka Tengah dan hebahan media sosial.',
+                                tindakan: 'Unit Komunikasi Korporat FAMA',
+                                masa: 'D-5',
+                                zon: 'Seluruh Melaka'
+                            },
+                            {
+                                id: 'p1_s3_t1',
+                                text: 'Tempatkan tong sampah roro, tong sampah beroda di setiap kluster, dan sanitasi tandas lelaki & perempuan KV Melaka Tengah.',
+                                tindakan: 'JK Kebersihan & Kontraktor Sisa',
+                                masa: 'D-1',
+                                zon: 'Seluruh Tapak KV'
+                            },
+                            {
+                                id: 'p1_s3_t2',
+                                text: 'Penerimaan dan kawalan keselamatan hadiah Cabutan Bertuah Utama: MOTORSIKAL & TELEVISYEN.',
+                                tindakan: 'JK Hadiah & Penajaan Pentas',
+                                masa: 'D-1 (18:00)',
+                                zon: 'Bilik Simpanan Hadiah'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'p2',
+                title: 'Fasa 2: Hari 1 – Jumaat, 23 Oktober 2026 (Kombo RM10 & Berselawat @ KV)',
+                shortTitle: 'Hari 1: Jumaat, 23 Okt',
+                icon: 'fa-calendar-day',
+                color: 'bg-emerald-600',
+                durations: ['3day'],
+                sections: [
+                    {
+                        subtitle: '1. Sesi Pagi & Jualan Agro MADANI (08:00 PG - 12:00 TGH)',
+                        tasks: [
+                            {
+                                id: 'p2_s0_t0',
+                                text: '07:30 PG: Taklimat harian floor team, penyerahan walkie-talkie dan pengagihan kupon makan petugas.',
+                                tindakan: 'Pengurus Acara / JK Pentadbiran',
+                                masa: '07:30 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p2_s0_t1',
+                                text: '08:00 PG: Buka kaunter Jualan Agro MADANI Kombo Semarak Tani (RM10.00 untuk telur 1 papan + aneka bawang & kentang - Kuota 1,000 set) dan Sardin Agromas (RM10.00 untuk 2 tin).',
+                                tindakan: 'JK Jualan Agro MADANI Melaka',
+                                masa: '08:00 PG',
+                                zon: 'Khemah Kombo JAM'
+                            },
+                            {
+                                id: 'p2_s0_t2',
+                                text: '09:00 PG: Operasi penuh 100 lot jualan (Pameran, IMAT, Makanan Popular, Florikultur, Food Truck).',
+                                tindakan: 'Penyelaras Usahawan FAMA',
+                                masa: '09:00 PG',
+                                zon: 'Seluruh 100 Lot'
+                            },
+                            {
+                                id: 'p2_s0_t3',
+                                text: '10:00 PG: Kendalikan Pertandingan Mewarna Kanak-kanak (50 peserta) & Kolaj Dewasa (30 peserta).',
+                                tindakan: 'JK Aktiviti Interaktif Kanak-kanak',
+                                masa: '10:00 PG',
+                                zon: 'Pentas / Khemah Interaktif'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. Sesi Petang: Promosi, Buskers & Pertandingan Memasak (13:00 - 18:00)',
+                        tasks: [
+                            {
+                                id: 'p2_s1_t0',
+                                text: '01:00 - 02:00 PTG: Sesi Promosi Produk Usahawan Tempatan & Kuiz Interaktif Kahoot! di Pentas Utama.',
+                                tindakan: 'JK Promosi & Pengacaraan Pentas',
+                                masa: '13:00 PTG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p2_s1_t1',
+                                text: '02:00 - 03:00 PTG: Persembahan Buskers secara langsung oleh Black Buskers.',
+                                tindakan: 'JK Acara Pentas & Kesenian',
+                                masa: '14:00 PTG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p2_s1_t2',
+                                text: '03:00 - 05:00 PTG: Pertandingan Memasak Ikan Bakar (10 peserta terbuka, 5 pasukan Kolej Vokasional Melaka Tengah).',
+                                tindakan: 'JK Kluster IMAT & Kolej Vokasional',
+                                masa: '15:00 PTG',
+                                zon: 'Zon Central Kitchen'
+                            },
+                            {
+                                id: 'p2_s1_t3',
+                                text: 'Aktiviti Sepanjang Hari di Khemah IMAT: Demo produk Agromas, demo penyediaan kerepek pisang live, dan pembuatan tart nenas.',
+                                tindakan: 'JK Kluster IMAT Melaka',
+                                masa: 'Sepanjang Hari',
+                                zon: 'Khemah IMAT'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '3. Sesi Malam: Program Berselawat Hijjaz & UNIC (20:00 - 22:00)',
+                        tasks: [
+                            {
+                                id: 'p2_s2_t0',
+                                text: '08:00 MLM: Kendalikan Program Berselawat dan Persembahan Rohani oleh Kumpulan Hijjaz & UNIC (Sahabat Ilmuwan FAMA).',
+                                tindakan: 'JK Acara Pentas & Penerangan Islamik',
+                                masa: '20:00 MLM',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p2_s2_t1',
+                                text: '10:00 MLM: Penutupan operasi Hari 1, kutipan data jualan harian usahawan, pembersihan sampah roro.',
+                                tindakan: 'JK Penilaian & JK Kebersihan',
+                                masa: '22:00 MLM',
+                                zon: 'Seluruh Tapak KV'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'p3',
+                title: 'Fasa 3: Hari 2 – Sabtu, 24 Oktober 2026 (Zumbatik, E-Sport & Power Suria FM @ KV)',
+                shortTitle: 'Hari 2: Sabtu, 24 Okt (KV)',
+                icon: 'fa-trophy',
+                color: 'bg-indigo-600',
+                durations: ['2day', '3day'],
+                sections: [
+                    {
+                        subtitle: '1. Sesi Pagi: Kecergasan, Jualan Kombo & E-Sport (08:00 - 12:00)',
+                        tasks: [
+                            {
+                                id: 'p3_s0_t0',
+                                text: '08:00 PG: Buka kaunter Jualan Agro MADANI Kombo Semarak Tani Hari Ke-2 (1,000 set telur + sayur asas pada harga RM10.00).',
+                                tindakan: 'JK Jualan Agro MADANI Melaka',
+                                masa: '08:00 PG',
+                                zon: 'Khemah Kombo JAM'
+                            },
+                            {
+                                id: 'p3_s0_t1',
+                                text: '08:00 PG: Program Zumbatik (Senamrobik bertenaga bertemakan Sarung / Kain Batik) terbuka kepada komuniti.',
+                                tindakan: 'JK Aktiviti Komuniti & Sukan',
+                                masa: '08:00 PG',
+                                zon: 'Hadapan Pentas Utama'
+                            },
+                            {
+                                id: 'p3_s0_t2',
+                                text: '09:00 - 12:00 TGH: Pertandingan E-Sport / E-Football (30 peserta bersaing, hadiah cabutan disediakan).',
+                                tindakan: 'JK Belia & E-Sport FAMA Melaka',
+                                masa: '09:00 PG',
+                                zon: 'Khemah Modular / Pentas'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. Sesi Petang: Promosi, Buskers & Sukan Tradisional (12:00 - 18:00)',
+                        tasks: [
+                            {
+                                id: 'p3_s1_t0',
+                                text: '12:00 TGH: Promosi Produk Usahawan Tempatan & Pertandingan Kahoot! Siri 2.',
+                                tindakan: 'JK Pengacaraan & Promosi',
+                                masa: '12:00 TGH',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p3_s1_t1',
+                                text: '02:00 - 03:00 PTG: Persembahan Buskers oleh Black Buskers.',
+                                tindakan: 'JK Acara Pentas',
+                                masa: '14:00 PTG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p3_s1_t2',
+                                text: '03:00 - 05:00 PTG: Pertandingan Sukan Tradisional antara 10 kumpulan persatuan kampung & taman sekitar Melaka.',
+                                tindakan: 'JK Sukan Tradisional & Komuniti',
+                                masa: '15:00 PTG',
+                                zon: 'Padang Terbuka KV'
+                            },
+                            {
+                                id: 'p3_s1_t3',
+                                text: 'Aktiviti Sepanjang Hari di Khemah IMAT: Demo kerepek pisang live, pembuatan tart nenas & demo produk Agromas.',
+                                tindakan: 'JK Kluster IMAT Melaka',
+                                masa: 'Sepanjang Hari',
+                                zon: 'Khemah IMAT'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '3. Sesi Malam: Konsert Power Suria FM & Raptai Perasmian PM',
+                        tasks: [
+                            {
+                                id: 'p3_s2_t0',
+                                text: '08:00 MLM: Penampilan Khas Power Suria FM bersama Juruhebah Suria FM, selebriti jemputan dan artis pentas.',
+                                tindakan: 'JK Acara Pentas & Suria FM',
+                                masa: '20:00 MLM',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p3_s2_t1',
+                                text: '10:30 MLM: Raptai Penuh (Dry Run) Majlis Perasmian Perdana Menteri (Audio lagu Negaraku, platform hydrolic gimik, susunan kerusi VIP, kawalan lalu lintas).',
+                                tindakan: 'JK Protokol PM, Pengurus Acara & PDRM',
+                                masa: '22:30 MLM',
+                                zon: 'Pentas & Bilik VIP KV'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'p4',
+                title: 'Fasa 4: Hari 3 – Ahad, 25 Oktober 2026 (Majlis Perasmian YAB PM, Kombo Ayam & Cabutan Motorsikal)',
+                shortTitle: 'Hari 3: Ahad, 25 Okt (Perasmian PM)',
+                icon: 'fa-star',
+                color: 'bg-amber-500',
+                durations: ['half_25', '1day', '2day', '3day'],
+                sections: [
+                    {
+                        subtitle: '1. Sesi Pagi: Jualan Kombo Ayam & Townhall Usahawan (08:00 - 10:30)',
+                        tasks: [
+                            {
+                                id: 'p4_s0_t0',
+                                text: '07:00 PG: PDRM & Trafik menutup perimeter Jalan Pengkalan Balak; sekuriti memeriksa padang dan Bilik VIP.',
+                                tindakan: 'PDRM Cawangan Khas & Trafik',
+                                masa: '07:00 PG',
+                                zon: 'Pintu Masuk & Parkir VIP'
+                            },
+                            {
+                                id: 'p4_s0_t1',
+                                text: '08:00 PG: Buka Jualan Agro MADANI Kombo Ayam & Telur (RM15.00 - Ayam 1 ekor + Telur 30 biji, kuota 1,000 set).',
+                                tindakan: 'JK Jualan Agro MADANI Melaka',
+                                masa: '08:00 PG',
+                                zon: 'Khemah Kombo JAM'
+                            },
+                            {
+                                id: 'p4_s0_t2',
+                                text: '09:00 PG: Townhall Usahawan (Sesi 1: "Dari Idea ke Pasaran: Membina Usahawan Masa Hadapan"; Sesi 2: "TVET Agropreneur: Dari Kemahiran ke Perniagaan").',
+                                tindakan: 'JK Townhall & Kolej Vokasional',
+                                masa: '09:00 PG',
+                                zon: 'Pentas Utama KV'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. MAJLIS PERASMIAN OLEH YAB PERDANA MENTERI (10:30 - 13:00)',
+                        tasks: [
+                            {
+                                id: 'p4_s1_t0',
+                                text: '10:30 PG: Sambut ketibaan dif-dif jemputan, KSN, KSU KPKM, Pengerusi & Ketua Pengarah Agensi KPKM.',
+                                tindakan: 'JK Sambutan & Protokol FAMA',
+                                masa: '10:30 PG',
+                                zon: 'Bilik Menunggu VIP'
+                            },
+                            {
+                                id: 'p4_s1_t1',
+                                text: '10:45 PG: Sambut ketibaan YB Datuk Seri Haji Mohamad bin Sabu (Menteri KPKM).',
+                                tindakan: 'Pengerusi & KP FAMA',
+                                masa: '10:45 PG',
+                                zon: 'Bilik Menunggu VIP'
+                            },
+                            {
+                                id: 'p4_s1_t2',
+                                text: '11:00 PG: Sambut ketibaan YAB Dato\' Seri Anwar bin Ibrahim (Perdana Menteri Malaysia) diiringi konvoi PDRM.',
+                                tindakan: 'JK Protokol Pejabat PM & FAMA',
+                                masa: '11:00 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t3',
+                                text: '11:10 PG: Persembahan Tarian Selamat Datang, nyanyian Lagu Negaraku & Melakaku Maju Jaya.',
+                                tindakan: 'JK Kesenian & Teknikal Audio',
+                                masa: '11:10 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t4',
+                                text: '11:15 PG: Bacaan Doa Pembuka Majlis oleh Pegawai Agama.',
+                                tindakan: 'Pegawai Agama FAMA',
+                                masa: '11:15 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t5',
+                                text: '11:20 PG: Ucapan Alu-aluan oleh YB Datuk Seri Haji Mohamad bin Sabu (Menteri Pertanian dan Keterjaminan Makanan).',
+                                tindakan: 'JK Protokol & Teks Ucapan',
+                                masa: '11:20 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t6',
+                                text: '11:25 PG: Amanat & Ucapan Perasmian oleh YAB Dato\' Seri Anwar bin Ibrahim (Perdana Menteri Malaysia).',
+                                tindakan: 'JK Protokol PM & Emcee',
+                                masa: '11:25 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t7',
+                                text: '11:40 PG: Gimik Perasmian (Plug Gimik hydrolic logo Karnival & hiasan buahan tempatan), Penyampaian Insentif Usahawan FAMA Negeri Melaka, dan Cabutan Bertuah Utama (Motorsikal & TV).',
+                                tindakan: 'JK Gimik, Hadiah & Pengiring VIP',
+                                masa: '11:40 PG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s1_t8',
+                                text: '12:00 TGH: Sesi lawatan YAB Perdana Menteri & VVIP ke reruai usahawan (Kluster Pameran KPKM, IMAT, Makanan Popular).',
+                                tindakan: 'JK Pengiring VIP & Kawalan PDRM',
+                                masa: '12:00 TGH',
+                                zon: 'Khemah Pameran & Jualan'
+                            },
+                            {
+                                id: 'p4_s1_t9',
+                                text: '12:45 PTG: Jamuan tengah hari VVIP di Bilik Menunggu VIP.',
+                                tindakan: 'JK Jamuan VIP & Protokol',
+                                masa: '12:45 PTG',
+                                zon: 'Bilik Menunggu VIP'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '3. Sesi Petang & Malam: Hybrid Fitness, Buskers & Penutupan (14:00 - 22:00)',
+                        tasks: [
+                            {
+                                id: 'p4_s2_t0',
+                                text: '02:00 - 03:00 PTG: Persembahan Buskers oleh Black Buskers.',
+                                tindakan: 'JK Acara Pentas',
+                                masa: '14:00 PTG',
+                                zon: 'Pentas Utama KV'
+                            },
+                            {
+                                id: 'p4_s2_t1',
+                                text: '04:00 - 06:00 PTG: Pertandingan Hybrid Fitness (Dinilai oleh pihak Angkatan Tentera Malaysia - ATM).',
+                                tindakan: 'JK Sukan & Pihak ATM Melaka',
+                                masa: '16:00 PTG',
+                                zon: 'Padang Terbuka KV'
+                            },
+                            {
+                                id: 'p4_s2_t2',
+                                text: '08:00 MLM: Persembahan Penutup oleh Black Buskers & Cabutan Bertuah Sampingan untuk pengunjung.',
+                                tindakan: 'JK Acara Pentas & Hadiah',
+                                masa: '20:00 MLM',
+                                zon: 'Pentas Utama KV'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'p5',
+                title: 'Fasa 5: Pasca Acara, Pembongkaran & Pelaporan (Post-Mortem)',
+                shortTitle: 'Fasa 5: Pasca Acara & Laporan',
+                icon: 'fa-flag-checkered',
+                color: 'bg-teal-700',
+                durations: ['half_24', 'half_25', '1day', '2day', '3day'],
+                sections: [
+                    {
+                        subtitle: '1. Pembongkaran Struktur & Pembersihan Tapak',
+                        tasks: [
+                            {
+                                id: 'p5_s0_t0',
+                                text: 'Bongkar khemah tapak, pentas, genset, sistem siaraya, skrin LED dan kembalikan tapak kepada pihak sekolah/KV.',
+                                tindakan: 'JK Logistik, Khemah & Kontraktor',
+                                masa: 'D+1',
+                                zon: 'Padang KV & SJK(C) Keh Seng'
+                            },
+                            {
+                                id: 'p5_s0_t1',
+                                text: 'Pembersihan menyeluruh sisa buangan sampah, sanitasi tapak dan penyerahan semula padang/dewan.',
+                                tindakan: 'JK Kebersihan, RELA & Pihak Sekolah',
+                                masa: 'D+1',
+                                zon: 'Tapak Acara'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: '2. Pengauditan Jualan, Tuntutan Subsidi & Pelaporan KPI',
+                        tasks: [
+                            {
+                                id: 'p5_s1_t0',
+                                text: 'Kumpul dan sahkan jumlah jualan keseluruhan karnival daripada semua usahawan.',
+                                tindakan: 'Unit Penilaian & Statistik FAMA Melaka',
+                                masa: 'D+2',
+                                zon: 'Ibu Pejabat FAMA'
+                            },
+                            {
+                                id: 'p5_s1_t1',
+                                text: 'Sahkan anggaran jumlah kehadiran pengunjung sepanjang karnival berlangsung.',
+                                tindakan: 'Unit Komunikasi Korporat FAMA',
+                                masa: 'D+2',
+                                zon: 'Ibu Pejabat FAMA'
+                            },
+                            {
+                                id: 'p5_s1_t2',
+                                text: 'Selesaikan penyelarasan baucar subsidi Kombo Jualan Agro MADANI & pengagihan nanas MD2 percuma.',
+                                tindakan: 'Unit Kewangan FAMA Melaka & LPNM',
+                                masa: 'D+3',
+                                zon: 'Unit Kewangan'
+                            },
+                            {
+                                id: 'p5_s1_t3',
+                                text: 'Hantar Surat Penghargaan Rasmi kepada Pejabat PM, Pejabat Menteri KPKM, PDRM, ATM, SJK(C) Keh Seng, dan KV Melaka Tengah.',
+                                tindakan: 'Unit Komunikasi Korporat FAMA',
+                                masa: 'D+4',
+                                zon: 'Pengurusan Tertinggi'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let currentDuration = localStorage.getItem('semarak_tani_duration') || '3day';
+        let userProgress = JSON.parse(localStorage.getItem('semarak_tani_progress')) || {};
+        let customTasks = JSON.parse(localStorage.getItem('semarak_tani_custom_tasks')) || [];
+        let currentFilter = 'all';
+        let currentStatusFilter = 'all'; // 'all', 'pending', 'completed'
+        let currentPicFilter = 'all';
+        let searchQuery = '';
+        let activeTab = 'checklist';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectEl = document.getElementById('event-duration-select');
+            if (selectEl) selectEl.value = currentDuration;
+            
+            updateHeaderMetrics();
+            updateFilterButtons();
+            populatePicDropdown();
+            renderModalPhaseOptions();
+            renderChecklist();
+            updateStats();
+            updatePrintHeaders();
+
+            // Close quick menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const quickMenu = document.getElementById('quick-menu');
+                if (quickMenu && !quickMenu.contains(e.target) && !e.target.closest('button[onclick="toggleQuickMenu()"]')) {
+                    quickMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        function switchTab(tabId) {
+            activeTab = tabId;
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-content-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+                if (btn.id === 'tab-btn-kehseng') {
+                    btn.className = 'nav-tab-btn px-3 py-1.5 rounded-lg bg-amber-500/30 hover:bg-amber-500/40 text-amber-200 border border-amber-400/40 transition flex items-center gap-1.5 whitespace-nowrap font-black';
+                } else {
+                    btn.className = 'nav-tab-btn px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-100 transition flex items-center gap-1.5 whitespace-nowrap';
+                }
+            });
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                if (tabId === 'kehseng') {
+                    activeBtn.className = 'nav-tab-btn px-3 py-1.5 rounded-lg bg-amber-500 text-slate-900 shadow-md flex items-center gap-1.5 whitespace-nowrap font-black border border-amber-300';
+                } else {
+                    activeBtn.className = 'nav-tab-btn px-3 py-1.5 rounded-lg bg-emerald-500 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap font-bold';
+                }
+            }
+        }
+
+        function changeDuration(duration) {
+            currentDuration = duration;
+            localStorage.setItem('semarak_tani_duration', duration);
+            currentFilter = 'all';
+            updateHeaderMetrics();
+            updateFilterButtons();
+            populatePicDropdown();
+            renderModalPhaseOptions();
+            renderChecklist();
+            updateStats();
+            updatePrintHeaders();
+            showToast('Format acara diselaraskan: ' + getDurationLabel(duration));
+        }
+
+        function getDurationLabel(dur) {
+            switch(dur) {
+                case 'half_24': return 'Half-Day (24 Okt: Lawatan YBM @ SJK(C) Keh Seng)';
+                case 'half_25': return 'Half-Day (25 Okt: Perasmian PM @ KV Melaka Tengah)';
+                case '1day': return '1-Day Event (25 Okt)';
+                case '2day': return '2-Day Event (24–25 Okt)';
+                case '3day': return '3-Day Mega Event (23–25 Okt)';
+                default: return dur;
+            }
+        }
+
+        function updateHeaderMetrics() {
+            const isKehSengOnly = currentDuration === 'half_24';
+            
+            const salesEl = document.getElementById('metric-val-sales');
+            const visEl = document.getElementById('metric-val-visitors');
+            const lotsEl = document.getElementById('metric-val-lots');
+            const budEl = document.getElementById('metric-val-budget');
+            const vipText = document.getElementById('vip-highlight-text');
+
+            if (isKehSengOnly) {
+                if (salesEl) salesEl.innerText = 'RM 50,000+';
+                if (visEl) visEl.innerText = '500 - 1,000 Pax';
+                if (lotsEl) lotsEl.innerText = '27 Khemah + 2 FT';
+                if (budEl) budEl.innerText = 'SJK(C) Keh Seng';
+                if (vipText) vipText.innerHTML = 'Tetamu Kehormat: <strong class="text-amber-800">YB Menteri KPKM (Datuk Seri Mohamad Sabu)</strong>';
+            } else {
+                if (salesEl) salesEl.innerText = 'RM 750,000';
+                if (visEl) visEl.innerText = '25,000 Orang';
+                if (lotsEl) lotsEl.innerText = '100 Lot / 40 Khemah';
+                if (budEl) budEl.innerText = 'RM 300,000';
+                if (vipText) vipText.innerHTML = 'Perasmi: <strong class="text-slate-800">YAB Dato\' Seri Anwar Ibrahim (PM)</strong>';
+            }
+        }
+
+        function getActivePhases() {
+            return semarakTaniMasterData.filter(p => p.durations.includes(currentDuration));
+        }
+
+        function updateFilterButtons() {
+            const container = document.getElementById('filter-buttons-container');
+            const activePhases = getActivePhases();
+
+            let html = `<button onclick="filterPhase('all')" id="filter-all" class="phase-btn px-3 py-1.5 text-xs font-black rounded-lg bg-emerald-700 text-white transition whitespace-nowrap shadow-xs">Semua Fasa</button>`;
+            
+            activePhases.forEach(phase => {
+                const isHighlight = phase.id === 'p_kehseng';
+                const baseClass = isHighlight 
+                    ? 'phase-btn px-2.5 py-1.5 text-xs font-bold rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 transition whitespace-nowrap'
+                    : 'phase-btn px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition whitespace-nowrap';
+                html += `<button onclick="filterPhase('${phase.id}')" id="filter-${phase.id}" class="${baseClass}">${phase.shortTitle || phase.title.split(':')[0]}</button>`;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('active-phase-label').innerText = 'Semua Fasa';
+        }
+
+        function populatePicDropdown() {
+            const select = document.getElementById('pic-filter-select');
+            if (!select) return;
+
+            const picsSet = new Set();
+            const activePhases = getActivePhases();
+            activePhases.forEach(phase => {
+                phase.sections.forEach(sec => {
+                    sec.tasks.forEach(task => {
+                        if (task.tindakan) picsSet.add(task.tindakan);
+                    });
+                });
+            });
+
+            customTasks.forEach(task => {
+                if (task.tindakan) picsSet.add(task.tindakan);
+            });
+
+            let optionsHtml = `<option value="all">Semua Jawatankuasa / PIC</option>`;
+            Array.from(picsSet).sort().forEach(pic => {
+                optionsHtml += `<option value="${escapeHtml(pic)}">${escapeHtml(pic)}</option>`;
+            });
+            select.innerHTML = optionsHtml;
+            select.value = currentPicFilter;
+        }
+
+        function renderModalPhaseOptions() {
+            const select = document.getElementById('modal-phase-select');
+            const activePhases = getActivePhases();
+            select.innerHTML = activePhases.map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+        }
+
+        function toggleTask(taskId) {
+            userProgress[taskId] = !userProgress[taskId];
+            localStorage.setItem('semarak_tani_progress', JSON.stringify(userProgress));
+            renderChecklist();
+            updateStats();
+        }
+
+        function deleteCustomTask(taskId) {
+            if (confirm('Adakah anda pasti mahu memadam tindakan tersuai ini?')) {
+                customTasks = customTasks.filter(t => t.id !== taskId);
+                delete userProgress[taskId];
+                localStorage.setItem('semarak_tani_custom_tasks', JSON.stringify(customTasks));
+                localStorage.setItem('semarak_tani_progress', JSON.stringify(userProgress));
+                populatePicDropdown();
+                renderChecklist();
+                updateStats();
+                showToast('Tindakan tersuai telah dipadam.');
+            }
+        }
+
+        function openAddTaskModal() {
+            document.getElementById('add-task-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('modal-task-input').focus(), 50);
+        }
+
+        function closeAddTaskModal() {
+            document.getElementById('add-task-modal').classList.add('hidden');
+            document.getElementById('modal-section-input').value = '';
+            document.getElementById('modal-pic-input').value = '';
+            document.getElementById('modal-time-input').value = '';
+            document.getElementById('modal-zone-input').value = '';
+            document.getElementById('modal-task-input').value = '';
+        }
+
+        function saveCustomTask() {
+            const phaseId = document.getElementById('modal-phase-select').value;
+            const sectionTitle = document.getElementById('modal-section-input').value.trim() || 'Tindakan Tambahan Tapak';
+            const tindakan = document.getElementById('modal-pic-input').value.trim() || 'Jawatankuasa Pelaksana';
+            const time = document.getElementById('modal-time-input').value.trim() || 'Mengikut Keperluan';
+            const zone = document.getElementById('modal-zone-input').value.trim() || 'Padang Acara';
+            const taskText = document.getElementById('modal-task-input').value.trim();
+
+            if (!taskText) {
+                alert('Sila masukkan keterangan tindakan / tugasan.');
+                return;
+            }
+
+            const newTask = {
+                id: 'custom_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+                phaseId: phaseId,
+                section: sectionTitle,
+                tindakan: tindakan,
+                masa: time,
+                zon: zone,
+                text: taskText,
+                isCustom: true
+            };
+
+            customTasks.push(newTask);
+            localStorage.setItem('semarak_tani_custom_tasks', JSON.stringify(customTasks));
+            closeAddTaskModal();
+            populatePicDropdown();
+            renderChecklist();
+            updateStats();
+            showToast('Tindakan baru berjaya ditambah.');
+        }
+
+        function filterPhase(phaseId) {
+            currentFilter = phaseId;
+            document.querySelectorAll('.phase-btn').forEach(btn => {
+                btn.className = 'phase-btn px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition whitespace-nowrap';
+            });
+            const activeBtn = document.getElementById(`filter-${phaseId}`);
+            if (activeBtn) {
+                activeBtn.className = 'phase-btn px-3 py-1.5 text-xs font-black rounded-lg bg-emerald-700 text-white transition whitespace-nowrap shadow-xs';
+            }
+            
+            if (phaseId === 'all') {
+                document.getElementById('active-phase-label').innerText = 'Semua Fasa';
+            } else {
+                const pObj = semarakTaniMasterData.find(p => p.id === phaseId);
+                document.getElementById('active-phase-label').innerText = pObj ? (pObj.shortTitle || pObj.title.split(':')[0]) : 'Fasa';
+            }
+            renderChecklist();
+        }
+
+        function setStatusFilter(status) {
+            currentStatusFilter = status;
+            ['all', 'pending', 'completed'].forEach(s => {
+                const btn = document.getElementById(`status-filter-${s}`);
+                if (btn) {
+                    if (s === status) {
+                        btn.className = 'px-2.5 py-1 rounded font-black transition text-xs bg-white text-slate-900 shadow-xs';
+                    } else {
+                        btn.className = 'px-2.5 py-1 rounded font-medium transition text-xs text-slate-500 hover:text-slate-800';
+                    }
+                }
+            });
+            renderChecklist();
+        }
+
+        function handlePicFilter(val) {
+            currentPicFilter = val;
+            renderChecklist();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (searchQuery) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderChecklist();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            searchQuery = '';
+            renderChecklist();
+        }
+
+        function toggleQuickMenu() {
+            const menu = document.getElementById('quick-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function markVisibleTasks(markCompleted) {
+            const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                const taskId = cb.getAttribute('data-task-id');
+                if (taskId) {
+                    userProgress[taskId] = markCompleted;
+                }
+            });
+            localStorage.setItem('semarak_tani_progress', JSON.stringify(userProgress));
+            renderChecklist();
+            updateStats();
+            document.getElementById('quick-menu').classList.add('hidden');
+            showToast(markCompleted ? 'Tugasan paparan ditandakan selesai.' : 'Tugasan paparan dinyah-tanda.');
+        }
+
+        function renderChecklist() {
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = '';
+
+            let activePhases = getActivePhases();
+            
+            // Clone & merge custom tasks
+            let phaseData = activePhases.map(phase => {
+                let sections = phase.sections.map(s => ({
+                    subtitle: s.subtitle,
+                    tasks: [...s.tasks]
+                }));
+
+                const phaseCustoms = customTasks.filter(c => c.phaseId === phase.id);
+                phaseCustoms.forEach(c => {
+                    let sec = sections.find(s => s.subtitle.toLowerCase() === c.section.toLowerCase());
+                    if (!sec) {
+                        sec = { subtitle: c.section, tasks: [] };
+                        sections.push(sec);
+                    }
+                    sec.tasks.push(c);
+                });
+
+                return {
+                    id: phase.id,
+                    title: phase.title,
+                    icon: phase.icon,
+                    color: phase.color,
+                    sections: sections
+                };
+            });
+
+            let totalRenderedPhases = 0;
+
+            phaseData.forEach(phase => {
+                if (currentFilter !== 'all' && currentFilter !== phase.id) return;
+
+                let phaseHasVisibleTasks = false;
+                let phaseHtml = '';
+
+                phase.sections.forEach(section => {
+                    let sectionHtml = '';
+                    let sectionHasVisibleTasks = false;
+
+                    section.tasks.forEach(task => {
+                        const taskId = task.id;
+                        const isDone = !!userProgress[taskId];
+
+                        // Status Filter
+                        if (currentStatusFilter === 'pending' && isDone) return;
+                        if (currentStatusFilter === 'completed' && !isDone) return;
+
+                        // PIC Filter
+                        if (currentPicFilter !== 'all' && task.tindakan !== currentPicFilter) return;
+
+                        // Search Query
+                        const searchTarget = `${task.text} ${section.subtitle} ${phase.title} ${task.tindakan || ''} ${task.masa || ''} ${task.zon || ''}`.toLowerCase();
+                        if (searchQuery && !searchTarget.includes(searchQuery)) {
+                            return;
+                        }
+
+                        sectionHasVisibleTasks = true;
+                        phaseHasVisibleTasks = true;
+
+                        const isChecked = isDone ? 'checked' : '';
+                        const textClass = isDone ? 'line-through text-slate-400' : 'text-slate-800 font-semibold';
+                        const isCustom = !!task.isCustom;
+
+                        sectionHtml += `
+                            <div class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 transition shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 print-break-inside-avoid">
+                                <!-- Checkbox & Task Text -->
+                                <label class="flex items-start gap-3 flex-1 cursor-pointer">
+                                    <input type="checkbox" data-task-id="${taskId}" ${isChecked} onchange="toggleTask('${taskId}')" class="mt-1 h-4 w-4 rounded border-slate-300 text-fama-600 focus:ring-fama-500 cursor-pointer transition">
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-xs sm:text-sm ${textClass} select-none leading-relaxed">${escapeHtml(task.text)}</span>
+                                        <div class="flex flex-wrap items-center gap-1.5 text-[11px] mt-0.5">
+                                            ${task.masa ? `<span class="inline-flex items-center gap-1 font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200/80"><i class="fa-regular fa-clock text-[10px]"></i> ${escapeHtml(task.masa)}</span>` : ''}
+                                            ${task.zon ? `<span class="inline-flex items-center gap-1 font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200"><i class="fa-solid fa-location-dot text-[10px] text-rose-500"></i> ${escapeHtml(task.zon)}</span>` : ''}
+                                            ${isCustom ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Tersuai</span>` : ''}
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- DEDICATED TINDAKAN / BY WHOM COLUMN & BADGE -->
+                                <div class="flex items-center justify-between md:justify-end gap-3 min-w-[240px] pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
+                                    <div class="flex flex-col md:items-end">
+                                        <span class="text-[9px] font-black uppercase tracking-wider text-slate-400">TINDAKAN (BY WHOM)</span>
+                                        <span class="inline-flex items-center gap-1.5 text-xs font-black text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-200 transition">
+                                            <i class="fa-solid fa-user-check text-emerald-600 text-[11px]"></i>
+                                            ${escapeHtml(task.tindakan || 'JK Pelaksana')}
+                                        </span>
+                                    </div>
+
+                                    ${isCustom ? `<button onclick="deleteCustomTask('${taskId}')" class="no-print text-slate-300 hover:text-rose-600 transition text-xs p-1" title="Padam tugasan tersuai"><i class="fa-solid fa-trash-can"></i></button>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    if (sectionHasVisibleTasks) {
+                        phaseHtml += `
+                            <div class="mb-4 last:mb-0">
+                                <h4 class="text-xs font-black uppercase tracking-wider text-slate-600 mb-2 px-1 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span> ${escapeHtml(section.subtitle)}
+                                </h4>
+                                <div class="flex flex-col gap-2">
+                                    ${sectionHtml}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                if (phaseHasVisibleTasks) {
+                    totalRenderedPhases++;
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-2xl p-5 shadow-sm border border-slate-200 print-card print-break-inside-avoid';
+                    card.innerHTML = `
+                        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                            <div class="${phase.color} text-white w-9 h-9 rounded-xl flex items-center justify-center shadow-sm text-sm">
+                                <i class="fa-solid ${phase.icon}"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-extrabold text-slate-900">${escapeHtml(phase.title)}</h3>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            ${phaseHtml}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+
+            if (totalRenderedPhases === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-2xl p-12 text-center border border-slate-200">
+                        <i class="fa-solid fa-clipboard-question text-slate-300 text-4xl mb-3"></i>
+                        <p class="text-sm font-bold text-slate-700">Tiada tugasan yang sepadan dengan tapisan.</p>
+                        <p class="text-xs text-slate-400 mt-1">Sila tukar fasa, kosongkan carian, atau pilih "Semua Jawatankuasa / PIC".</p>
+                    </div>
+                `;
+            }
+        }
+
+        function updateStats() {
+            let total = 0;
+            let completed = 0;
+
+            const activePhases = getActivePhases();
+
+            // Default tasks
+            activePhases.forEach(phase => {
+                phase.sections.forEach(section => {
+                    section.tasks.forEach(task => {
+                        total++;
+                        if (userProgress[task.id]) completed++;
+                    });
+                });
+            });
+
+            // Custom tasks
+            customTasks.forEach(custom => {
+                if (activePhases.some(p => p.id === custom.phaseId)) {
+                    total++;
+                    if (userProgress[custom.id]) completed++;
+                }
+            });
+
+            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+            document.getElementById('progress-percentage').innerText = `${percentage}%`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('completed-count').innerText = `${completed} / ${total}`;
+
+            const milestoneEl = document.getElementById('milestone-text');
+            if (percentage === 100 && total > 0) {
+                milestoneEl.innerHTML = `<span class="text-emerald-700 font-black"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> SEMUA TINDAKAN TELAH DISELESAIKAN! Tapak & protokol sedia 100% untuk acara.</span>`;
+            } else if (percentage >= 60) {
+                milestoneEl.innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-flag text-emerald-600 mr-1"></i> Lebih 60% tindakan telah disahkan siap oleh jawatankuasa berkaitan.</span>`;
+            } else {
+                milestoneEl.innerHTML = `<span><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-1"></i> Tandakan tugasan yang telah diselesaikan oleh Jawatankuasa Pelaksana.</span>`;
+            }
+        }
+
+        function resetData() {
+            if (confirm('Adakah anda pasti mahu menetapkan semula (reset) kemajuan tindakan acara? Tugasan tersuai anda tidak akan dipadam.')) {
+                userProgress = {};
+                localStorage.removeItem('semarak_tani_progress');
+                renderChecklist();
+                updateStats();
+                showToast('Semua kemajuan tindakan telah ditetapkan semula.');
+            }
+        }
+
+        function exportData() {
+            const exportObj = {
+                app: 'SEMARAK_TANI_MEGA_MELAKA_PLANNER',
+                version: '3.0',
+                duration: currentDuration,
+                progress: userProgress,
+                customTasks: customTasks,
+                exportedAt: new Date().toISOString()
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            const dateStr = new Date().toISOString().slice(0, 10);
+            downloadAnchor.setAttribute("download", `semarak_tani_melaka_${currentDuration}_${dateStr}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast('Data pelan tindakan berjaya dieksport.');
+        }
+
+        function handleImportFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (!imported || typeof imported !== 'object') {
+                        throw new Error('Format fail tidak sah');
+                    }
+
+                    if (imported.duration) {
+                        currentDuration = imported.duration;
+                        localStorage.setItem('semarak_tani_duration', currentDuration);
+                        document.getElementById('event-duration-select').value = currentDuration;
+                    }
+
+                    if (imported.progress) {
+                        userProgress = imported.progress;
+                        localStorage.setItem('semarak_tani_progress', JSON.stringify(userProgress));
+                    }
+
+                    if (Array.isArray(imported.customTasks)) {
+                        customTasks = imported.customTasks;
+                        localStorage.setItem('semarak_tani_custom_tasks', JSON.stringify(customTasks));
+                    }
+
+                    updateHeaderMetrics();
+                    updateFilterButtons();
+                    populatePicDropdown();
+                    renderModalPhaseOptions();
+                    renderChecklist();
+                    updateStats();
+                    updatePrintHeaders();
+                    showToast('Data pelan tindakan berjaya diimport!');
+                } catch(err) {
+                    alert('Ralat membaca fail sandaran JSON. Sila pastikan fail export yang sah.');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function updatePrintHeaders() {
+            const durLabel = document.getElementById('print-duration-label');
+            const dateLabel = document.getElementById('print-date-label');
+            if (durLabel) durLabel.innerText = 'Format: ' + getDurationLabel(currentDuration);
+            if (dateLabel) dateLabel.innerText = 'Dicetak Pada: ' + new Date().toLocaleString('ms-MY');
+        }
+
+        function printProtocolChecklist() {
+            updatePrintHeaders();
+            window.print();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
