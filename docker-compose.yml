@@ -1,0 +1,9 @@
+services:
+  eventplanner:
+    build: .
+    container_name: eventplanner
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    environment:
+      - PORT=9090
